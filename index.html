@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Systems & Viscosity Flashcards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(to bottom right, #eff6ff, #e0e7ff);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+        
+        .container {
+            max-width: 56rem;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            color: #4b5563;
+            font-size: 0.875rem;
+        }
+        
+        .progress-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #4b5563;
+            margin-bottom: 0.25rem;
+        }
+        
+        .progress-bar-bg {
+            width: 100%;
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            height: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .progress-bar-fill {
+            background-color: #4f46e5;
+            height: 100%;
+            border-radius: 9999px;
+            transition: width 0.3s;
+        }
+        
+        .card-container {
+            position: relative;
+            width: 100%;
+            height: 24rem;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            perspective: 1000px;
+        }
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+        
+        .card-inner.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            border-radius: 0.75rem;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .card-front {
+            background-color: white;
+            border: 4px solid #c7d2fe;
+        }
+        
+        .card-back {
+            background: linear-gradient(to bottom right, #6366f1, #9333ea);
+            border: 4px solid #a5b4fc;
+            transform: rotateY(180deg);
+        }
+        
+        .card-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .card-front .card-label {
+            color: #4f46e5;
+        }
+        
+        .card-back .card-label {
+            color: #e0e7ff;
+        }
+        
+        .card-text {
+            font-size: 1.25rem;
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .card-front .card-text {
+            color: #1f2937;
+        }
+        
+        .card-back .card-text {
+            color: white;
+        }
+        
+        .card-hint {
+            margin-top: 2rem;
+            font-size: 0.875rem;
+        }
+        
+        .card-front .card-hint {
+            color: #9ca3af;
+        }
+        
+        .card-back .card-hint {
+            color: #c7d2fe;
+        }
+        
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .secondary-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background-color: #4f46e5;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:hover {
+            background-color: #4338ca;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: #374151;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #f9fafb;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .tips-box {
+            margin-top: 2rem;
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        .tips-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+        
+        .tips-list {
+            list-style: disc;
+            padding-left: 1.5rem;
+            color: #4b5563;
+            font-size: 0.875rem;
+        }
+        
+        .tips-list li {
+            margin-bottom: 0.25rem;
+        }
+        
+        @media (min-width: 768px) {
+            .title {
+                font-size: 2.25rem;
+            }
+            
+            .card-text {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Water Systems & Viscosity Study Cards</h1>
+            <p class="subtitle"><span id="totalCards">0</span> flashcards • Click card to flip • Use arrow keys to navigate</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-labels">
+                <span>Progress</span>
+                <span><span id="currentCard">1</span> / <span id="totalCardsBottom">0</span></span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="card-container" id="cardContainer">
+            <div class="card-inner" id="cardInner">
+                <div class="card-face card-front">
+                    <div class="card-label">QUESTION</div>
+                    <div class="card-text" id="questionText"></div>
+                    <div class="card-hint">Click to reveal answer</div>
+                </div>
+                <div class="card-face card-back">
+                    <div class="card-label">ANSWER</div>
+                    <div class="card-text" id="answerText"></div>
+                    <div class="card-hint">Click to see question</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn-secondary" id="prevBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+                Previous
+            </button>
+            <button class="btn-primary" id="nextBtn">
+                Next
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <div class="secondary-controls">
+            <button class="btn-secondary btn-small" id="shuffleBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="16 3 21 3 21 8"></polyline>
+                    <line x1="4" y1="20" x2="21" y2="3"></line>
+                    <polyline points="21 16 21 21 16 21"></polyline>
+                    <line x1="15" y1="15" x2="21" y2="21"></line>
+                    <line x1="4" y1="4" x2="9" y2="9"></line>
+                </svg>
+                Shuffle
+            </button>
+            <button class="btn-secondary btn-small" id="resetBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="1 4 1 10 7 10"></polyline>
+                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                </svg>
+                Reset
+            </button>
+        </div>
+
+        <div class="tips-box">
+            <p class="tips-title">Study Tips:</p>
+            <ul class="tips-list">
+                <li>Click or tap any card to flip between question and answer</li>
+                <li>Use keyboard shortcuts: ← Previous, → Next, Space to flip</li>
+                <li>Shuffle cards for random practice</li>
+                <li>Track your progress with the bar above</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const flashcardsData = [
+            { q: "What percentage of Earth's water is salt water?", a: "97% (found in oceans)" },
+            { q: "What percentage of Earth's fresh water is frozen?", a: "2/3 (about 67%) is frozen in ice sheets and glaciers" },
+            { q: "How much of Earth's water is available liquid fresh water?", a: "Less than 1%" },
+            { q: "Define the water cycle", a: "The continuous movement of water between Earth's surface and atmosphere through evaporation, condensation, and precipitation" },
+            { q: "What drives the water cycle?", a: "The Sun's energy" },
+            { q: "Define evaporation", a: "The process where liquid water changes to gas (water vapour)" },
+            { q: "Define condensation", a: "The process where gas (water vapour) changes to liquid, forming clouds" },
+            { q: "Define precipitation", a: "Rain, snow, or other forms of water falling to Earth" },
+            { q: "Define run-off", a: "Water flowing over the land surface (not absorbed or evaporated)" },
+            { q: "Define infiltration", a: "Water soaking into the ground" },
+            { q: "What is salinity?", a: "The amount of salt dissolved in water" },
+            { q: "What is the average ocean salinity?", a: "35 parts per thousand (35 g salt per 1 L water)" },
+            { q: "Where is ocean salinity highest?", a: "Near the equator (high evaporation) and near poles (freezing leaves salt behind)" },
+            { q: "What makes up 85% of dissolved solids in ocean water?", a: "Sodium chloride (table salt)" },
+            { q: "Define density", a: "The amount of mass in a given volume" },
+            { q: "What is the density of ocean water vs. fresh water?", a: "Ocean water: 1027 kg/L, Fresh water: 1000 kg/L" },
+            { q: "Why is it easier to float in salt water?", a: "Ocean water is denser because of dissolved salt, providing more buoyancy" },
+            { q: "What is the freezing point of salt water vs. fresh water?", a: "Fresh water: 0°C, Salt water: -1.9°C" },
+            { q: "What is a drainage basin (watershed)?", a: "An area of land that drains into a body of water" },
+            { q: "What is the Continental Divide?", a: "High ground (Rocky Mountains) that separates drainage basins" },
+            { q: "How much more underground water is there than surface water?", a: "About 37 times more underground water than surface water" },
+            { q: "Define wetland", a: "A lowland area saturated with water all or most of the year" },
+            { q: "What percentage of Newfoundland & Labrador is wetlands?", a: "18%" },
+            { q: "How do glaciers form?", a: "Snow accumulates year-round, weight compresses bottom layers into ice, pressure causes partial melting, and the mass slides downhill" },
+            { q: "How much of Earth's fresh water do glaciers hold?", a: "2/3 (about 67%)" },
+            { q: "What is a crevasse?", a: "A deep crack in a glacier" },
+            { q: "How do icebergs form?", a: "When a glacier reaches the ocean, crevasses form, and chunks break off and fall into the ocean" },
+            { q: "What is global warming's effect on glaciers?", a: "Most glaciers are receding (melting/shrinking), leading to rising ocean levels and potential flooding" },
+            { q: "What factors increase run-off?", a: "Rock surface, heavy/long rain, steep slope, less vegetation, and more pavement/concrete" },
+            { q: "What factors decrease run-off?", a: "Soil surface, light/short rain, gentle slope, and more vegetation (absorbs water)" },
+            { q: "List the 5 major oceans from largest to smallest", a: "Pacific, Atlantic, Indian, Southern, Arctic" },
+            { q: "What was Pangea?", a: "A supercontinent where all continents were joined together 200 million years ago" },
+            { q: "Is the Pacific Ocean growing or shrinking?", a: "Shrinking (while the Atlantic is widening by ~3 cm/year)" },
+            { q: "How did ocean water originate?", a: "Volcanic eruptions released water vapour from inside Earth; it cooled, condensed, and fell as precipitation, collecting in ocean basins" },
+            { q: "What are ocean ridges?", a: "Underwater mountain chains formed where tectonic plates push apart; magma rises and hardens to create new sea floor" },
+            { q: "What is the largest ocean ridge?", a: "The Mid-Atlantic Ridge (1000+ km wide, rising 1000-3000 m above sea floor)" },
+            { q: "What are trenches?", a: "Deep ocean valleys formed where an oceanic plate collides with a continental plate and is forced beneath it" },
+            { q: "What is the deepest trench?", a: "Marianas Trench (11 km below sea level)" },
+            { q: "What are abyssal plains?", a: "Wide, flat areas between ridges and trenches, formed by thick sediment deposits (up to 1 km deep)" },
+            { q: "What is the continental shelf?", a: "The submerged part of a continent between the coast and basin edge; averages 80 km wide, 30-600 m deep" },
+            { q: "How wide is the Grand Banks continental shelf?", a: "480 km wide (one of the world's widest)" },
+            { q: "What is the continental slope?", a: "The steep drop from the shelf edge to ocean floor; usually <200 km wide, descends to ~3 km depth" },
+            { q: "Define ocean current", a: "A large mass of ocean water moving in a specific, unchanging direction" },
+            { q: "What are the two types of ocean currents?", a: "Surface currents (top 100-200 m, wind-driven) and deep currents (below 200 m, driven by temperature/salinity)" },
+            { q: "What is the largest ocean current?", a: "Antarctic Circumpolar Current (24,000 km long)" },
+            { q: "Name two important currents affecting Canada", a: "Gulf Stream (warm water from Caribbean) and Labrador Current (cold water from Baffin Bay)" },
+            { q: "What three factors influence surface currents?", a: "Wind, Earth's rotation (Coriolis effect), and continent shape" },
+            { q: "What is the Coriolis effect?", a: "The deflection of moving objects due to Earth's rotation; currents deflect right in Northern Hemisphere, left in Southern Hemisphere" },
+            { q: "How does wind affect ocean currents?", a: "Wind transfers energy to ocean surface via friction; current direction and speed match wind direction and speed" },
+            { q: "What are the 3 ocean temperature layers?", a: "Surface/Mixed Layer (warmest, sun-heated), Thermocline (rapid temperature drop), Deep Water (near freezing)" },
+            { q: "What is the thermocline?", a: "A layer of rapid temperature decrease (200-1000 m depth) where temperature drops from 20°C to 5°C" },
+            { q: "Why does cold water sink?", a: "Cold water is denser than warm water, so it sinks and creates deep ocean currents" },
+            { q: "What happens when salinity increases?", a: "Water becomes denser and sinks, creating deep currents" },
+            { q: "What decreases ocean salinity?", a: "Rivers adding fresh water, icebergs/glaciers melting, and high precipitation" },
+            { q: "What increases ocean salinity?", a: "High evaporation (hot, dry areas) and freezing (salt left behind)" },
+            { q: "What is upwelling?", a: "Vertical movement of deep, cold water to the surface" },
+            { q: "What causes upwelling?", a: "Strong offshore winds push surface water away from land; deep water rises to replace it" },
+            { q: "Why is upwelling important?", a: "It brings nutrients (phosphates, nitrates) to surface, supporting phytoplankton growth and creating rich fishing grounds" },
+            { q: "Give an example of a rich fishing ground created by upwelling", a: "The Grand Banks off Newfoundland" },
+            { q: "What happens during El Niño?", a: "Trade winds slow/stop, warm water stays in place, no upwelling occurs; causes droughts, fires, storms, and flooding in various regions" },
+            { q: "How often does El Niño occur?", a: "Every 3-7 years" },
+            { q: "What happens during La Niña?", a: "Trade winds increase, continuous upwelling of cold water; causes heavy rains and marine life flourishes" },
+            { q: "What causes ocean waves?", a: "Wind blowing over the water surface" },
+            { q: "What is the crest of a wave?", a: "The highest part of a wave" },
+            { q: "What is the trough of a wave?", a: "The lowest part of a wave" },
+            { q: "What is wavelength?", a: "The distance from one wave crest to the next crest" },
+            { q: "Do water particles move forward with waves?", a: "No, water particles move in circular patterns; only energy passes through the water" },
+            { q: "What are swells?", a: "Smooth waves from distant storms or winds, found even on calm days" },
+            { q: "Why do waves break near shore?", a: "The trough drags on the bottom (friction), the crest continues at same speed, wavelength shortens, height increases, and the crest outruns the trough" },
+            { q: "What causes tsunamis?", a: "Earthquakes, volcanic eruptions, or underwater landslides" },
+            { q: "How fast can tsunamis travel in open ocean?", a: "Up to 800 km/h" },
+            { q: "What are headlands?", a: "Areas of hard rock that resist erosion and extend into the water" },
+            { q: "What are bays?", a: "Coastal areas of soft rock that erode faster and recede inland" },
+            { q: "What are sea stacks?", a: "Isolated rock pillars created when waves erode headlands" },
+            { q: "What is a beach?", a: "A deposit of sediment (sand to boulders) along a shoreline" },
+            { q: "How do beaches change with seasons?", a: "Winter: large waves remove sediment, beach narrows; Summer: gentle waves deposit sediment, beach widens" },
+            { q: "What causes tides?", a: "Gravitational pull of the Moon (and Sun) on ocean water" },
+            { q: "How many high and low tides occur per day at most shorelines?", a: "2 high tides and 2 low tides" },
+            { q: "What are spring tides?", a: "Extra high and extra low tides that occur when Earth, Moon, and Sun are aligned (new and full moon)" },
+            { q: "What are neap tides?", a: "Tides with small difference between high and low, occurring when Sun and Moon are at right angles (first/third quarter moon)" },
+            { q: "What is tidal range?", a: "The difference in water level between high tide and low tide" },
+            { q: "What is the tidal range in the Bay of Fundy?", a: "Up to 20 m (due to V-shape that funnels water)" },
+            { q: "What is the difference between weather and climate?", a: "Weather: short-term atmospheric conditions; Climate: average weather over ~30 years for a region" },
+            { q: "What is specific heat capacity?", a: "The amount of heat needed to raise the temperature of a substance" },
+            { q: "Why do large bodies of water act as heat reservoirs?", a: "Water has very high specific heat capacity; it takes lots of heat to warm up and releases heat slowly" },
+            { q: "How does the Gulf Stream affect Britain's climate?", a: "It transfers warm water from the Caribbean, warming Britain and keeping harbors ice-free despite being at same latitude as Hudson Bay" },
+            { q: "What is convection?", a: "Heat transfer through air or water movement; warm air/water rises (less dense), cool air/water sinks (more dense)" },
+            { q: "How does the Labrador Current affect Newfoundland & Labrador?", a: "It brings cold water from the Arctic, keeping summers cool and creating fog when it meets the Gulf Stream" },
+            { q: "What are plankton?", a: "Free-floating organisms in water" },
+            { q: "What is phytoplankton?", a: "Microscopic plants that perform photosynthesis and form the base of aquatic food chains" },
+            { q: "What is zooplankton?", a: "Tiny animals that eat plankton" },
+            { q: "What percentage of Canada's wetlands are in the world?", a: "25% of the world's wetlands" },
+            { q: "What are 4 important functions of wetlands?", a: "Filter pollutants, hold water (prevent flooding), provide resting points for migrating birds, stabilize shorelines/minimize erosion" },
+            { q: "What is an estuary?", a: "Where a river meets the ocean, creating a mix of fresh and salt water (brackish water)" },
+            { q: "Why are estuaries important?", a: "They accumulate nutrients from land, rivers, and ocean; tides distribute nutrients and flush pollutants" },
+            { q: "What are bioindicator species?", a: "Organisms that indicate water quality; they're more sensitive than testing instruments" },
+            { q: "Give examples of bioindicator species", a: "Stonefly, caddisfly, and mayfly larvae (their absence often indicates pollution)" },
+            { q: "Where is most ocean life found?", a: "In the top 180 m (light penetration depth) and 90% on continental shelves (greatest food source)" },
+            { q: "What is bioluminescence?", a: "The ability to produce light through chemical reaction; used to find food, attract mates, or scare predators" },
+            { q: "What are point source pollutants?", a: "Pollution from small, specific areas that are easy to identify (landfills, factories, oil spills, sewage systems)" },
+            { q: "What are non-point source pollutants?", a: "Pollution from many different sources that are difficult to control (road oil, pesticides, fertilizers, urban run-off)" },
+            { q: "What is acid precipitation?", a: "Rain or snow with pH <5.6, formed when burning fossil fuels releases chemicals that combine with water to form acids" },
+            { q: "What is normal rain pH vs. acid precipitation pH?", a: "Normal rain: pH 5.6; Acid precipitation: pH <5.6 (can be as low as 2.8)" },
+            { q: "What are invasive species?", a: "Foreign species introduced to an ecosystem that disrupt food web balance; they often arrive via ship bilge water" },
+            { q: "Give an example of an invasive species in NL", a: "Green Crab (from Europe/North Africa) in Placentia Bay; eats rock crabs, clams, mussels, oysters, scallops, lobsters" },
+            { q: "What is overfishing?", a: "Taking more fish than can be replaced by reproduction" },
+            { q: "What is the problem with bottom-trawling?", a: "A steel frame is dragged across the ocean floor, damaging sea floor habitats; also catches unwanted marine life (1 tonne shrimp = 3 tonnes other fish killed)" },
+            { q: "What is aquaculture (aquafarming)?", a: "Growing and harvesting marine species in a controlled area" },
+            { q: "How much of the world's consumed fish comes from aquaculture?", a: "1/3 (about 33%)" },
+            { q: "What are 2 problems with aquaculture?", a: "Escaped fish can damage wild populations; disease and parasites can spread to wild fish" },
+            { q: "Define fluid", a: "Anything that flows (includes both liquids and gases)" },
+            { q: "Why aren't solids like sugar or sand considered fluids?", a: "They form piles rather than level surfaces, even though they can be poured" },
+            { q: "List the 5 points of Particle Theory of Matter", a: "1) All matter made of very small particles; 2) All particles in pure substance are same; 3) Space exists between particles; 4) Particles always moving; 5) Particles attracted to each other" },
+            { q: "Describe particle arrangement in solids", a: "Particles packed tightly together with strong attractive forces; they vibrate in place but don't separate, forming a rigid structure" },
+            { q: "What shape and volume do solids have?", a: "Definite shape and definite volume" },
+            { q: "Why don't solids flow?", a: "Particles can't easily move past each other due to strong attractive forces holding them together" },
+            { q: "Describe particle arrangement in liquids", a: "Particles in contact with each other but can slip and slide past one another; they have enough energy to pull from one neighbor and attract to the next" },
+            { q: "What shape and volume do liquids have?", a: "Take the shape of their container but have definite volume" },
+            { q: "Why do liquids flow?", a: "Particles can slide past each other, constantly 'changing partners'; they can't hold shape and flow to lowest level due to gravity" },
+            { q: "Why do liquids form a level surface at rest?", a: "They can't overcome gravity, so they flow to the lowest level" },
+            { q: "Describe particle arrangement in gases", a: "Very large spaces between particles (mostly empty space); particles move freely in all directions and spread out/diffuse in container" },
+            { q: "What shape and volume do gases have?", a: "Take both the shape and volume of their container" },
+            { q: "Why do gases flow?", a: "Particles are far apart, move freely in all directions, and have energy to move against gravity" },
+            { q: "Why do gas particles stay suspended?", a: "They have high energy, bounce off each other, and can move against gravity, occupying all available space" },
+            { q: "What is a change of state?", a: "When a physical state transforms to another state; occurs when heat is added or removed" },
+            { q: "Define melting", a: "Solid → Liquid (heat added, particles gain energy)" },
+            { q: "Define evaporation", a: "Liquid → Gas (heat added); slow vaporization over a wide temperature range" },
+            { q: "Define boiling", a: "Liquid → Gas (heat added); rapid vaporization at a specific temperature (boiling point)" },
+            { q: "What's the difference between evaporation and boiling?", a: "Evaporation: slow vaporization over wide temperature range; Boiling: rapid vaporization at specific temperature" },
+            { q: "Define condensation", a: "Gas → Liquid (heat removed, particles lose energy)" },
+            { q: "Define solidification (freezing)", a: "Liquid → Solid (heat removed)" },
+            { q: "Define sublimation", a: "Solid → Gas without going through liquid stage (example: dry ice)" },
+            { q: "Define deposition", a: "Gas → Solid without going through liquid stage (example: frost on windows)" },
+            { q: "What is melting point?", a: "The temperature at which a solid changes to liquid" },
+            { q: "What is freezing point?", a: "The temperature at which a liquid changes to solid" },
+            { q: "What is the relationship between melting point and freezing point?", a: "For a pure substance, melting point equals freezing point (e.g., water: 0°C)" },
+            { q: "What is boiling point?", a: "The temperature at which rapid vaporization (boiling) occurs" },
+            { q: "What is water's boiling point at sea level?", a: "100°C" },
+            { q: "Define viscosity", a: "A fluid's resistance to flow; its 'thickness' or 'thinness'" },
+            { q: "What is an example of high viscosity?", a: "Molasses or maple syrup (thick, slow flow)" },
+            { q: "What is an example of low viscosity?", a: "Water or milk (thin, fast flow)" },
+            { q: "Why do different fluids have different viscosities?", a: "Because particles have different abilities to slide past each other; some particles 'hold on' to each other more tightly" },
+            { q: "Define flow rate", a: "How fast a fluid flows from one point to another" },
+            { q: "How is flow rate measured?", a: "Distance fluid travels ÷ Time taken (units: cm/s)" },
+            { q: "What is the relationship between viscosity and flow rate?", a: "High viscosity = Low flow rate (slow); Low viscosity = High flow rate (fast)" },
+            { q: "How can you test viscosity?", a: "Measure flow rate; it's a good indicator of viscosity" },
+            { q: "How does increasing temperature affect liquid viscosity?", a: "Particles gain energy, move faster, pull away from neighbors more easily → Viscosity DECREASES (flows easier)" },
+            { q: "How does decreasing temperature affect liquid viscosity?", a: "Particles lose energy, move slower, harder to pull away → Viscosity INCREASES (flows slower)" },
+            { q: "How does increasing temperature affect gas viscosity?", a: "OPPOSITE to liquids! Particles speed up, collide more often, internal friction increases → Viscosity INCREASES" },
+            { q: "Why do gases respond differently to temperature than liquids?", a: "Gas particles are already far apart (don't need energy to move apart); temperature affects collision frequency instead" },
+            { q: "What is concentration in relation to fluids?", a: "The amount of substance dissolved in a specific volume" },
+            { q: "How does concentration affect viscosity?", a: "Increase concentration → Increase viscosity (example: adding cornstarch to gravy)" },
+            { q: "How do attractive forces between particles affect viscosity?", a: "Strong attractive forces → High viscosity (hard to pull apart); Weak attractive forces → Low viscosity (easy to pull apart)" },
+            { q: "How does particle size affect viscosity?", a: "Small particles → Low viscosity (more room to move); Large particles → High viscosity (less room, harder to move, may get stuck)" },
+            { q: "Why is oil more viscous than water?", a: "Oil particles are larger than water particles" },
+            { q: "How does particle shape affect viscosity?", a: "Simple shapes (spheres) flow faster; Complex shapes get tangled and move slowly → Higher viscosity" },
+            { q: "What is kinetic energy?", a: "Energy of motion; all moving objects and particles have kinetic energy" },
+            { q: "How does kinetic energy relate to temperature?", a: "More kinetic energy → Higher temperature; Less kinetic energy → Lower temperature" },
+            { q: "What happens when you add heat to particles?", a: "Increase kinetic energy → Increase temperature → Particles move faster" },
+            { q: "What happens when you remove heat from particles?", a: "Decrease kinetic energy → Decrease temperature → Particles move slower" }
+        ];
+
+        let currentIndex = 0;
+        let isFlipped = false;
+        let cards = [...flashcardsData];
+
+        const cardContainer = document.getElementById('cardContainer');
+        const cardInner = document.getElementById('cardInner');
+        const questionText = document.getElementById('questionText');
+        const answerText = document.getElementById('answerText');
+        const progressBar = document.getElementById('progressBar');
+        const currentCardSpan = document.getElementById('currentCard');
+        const totalCardsSpan = document.getElementById('totalCards');
+        const totalCardsBottomSpan = document.getElementById('totalCardsBottom');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const shuffleBtn = document.getElementById('shuffleBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        function updateCard() {
+            questionText.textContent = cards[currentIndex].q;
+            answerText.textContent = cards[currentIndex].a;
+            currentCardSpan.textContent = currentIndex + 1;
+            progressBar.style.width = ((currentIndex + 1) / cards.length * 100) + '%';
+        }
+
+        function flipCard() {
+            isFlipped = !isFlipped;
+            if (isFlipped) {
+                cardInner.classList.add('flipped');
+            } else {
+                cardInner.classList.remove('flipped');
+            }
+        }
+
+        function nextCard() {
+            isFlipped = false;
+            cardInner.classList.remove('flipped');
+            currentIndex = (currentIndex + 1) % cards.length;
+            updateCard();
+        }
+
+        function previousCard() {
+            isFlipped = false;
+            cardInner.classList.remove('flipped');
+            currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+            updateCard();
+        }
+
+        function shuffleCards() {
+            cards = [...cards].sort(() => Math.random() - 0.5);
+            currentIndex = 0;
+            isFlipped = false;
+            cardInner.classList.remove('flipped');
+            updateCard();
+        }
+
+        function resetCards() {
+            cards = [...flashcardsData];
+            currentIndex = 0;
+            isFlipped = false;
+            cardInner.classList.remove('flipped');
+            updateCard();
+        }
+
+        cardContainer.addEventListener('click', flipCard);
+        prevBtn.addEventListener('click', previousCard);
+        nextBtn.addEventListener('click', nextCard);
+        shuffleBtn.addEventListener('click', shuffleCards);
+        resetBtn.addEventListener('click', resetCards);
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                if (isFlipped) {
+                    nextCard();
+                } else {
+                    flipCard();
+                }
+            } else if (e.key === 'ArrowLeft') {
+                previousCard();
+            }
+        });
+
+        totalCardsSpan.textContent = cards.length;
+        totalCardsBottomSpan.textContent = cards.length;
+        updateCard();
+    </script>
+</body>
+</html>
