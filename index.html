@@ -352,7 +352,7 @@
   <!-- Header -->
   <div class="header">
     <h1 class="title">Chapter 9 — Forces &amp; Fluids</h1>
-    <p class="subtitle"><span id="totalCards">0</span> cards &nbsp;·&nbsp; Click to flip &nbsp;·&nbsp; Press P to pin</p>
+    <p class="subtitle"><span id="totalCards">0</span> cards &nbsp;·&nbsp; Click to flip &nbsp;·&nbsp; B to pin &nbsp;·&nbsp; V to cycle pinned</p>
   </div>
 
   <!-- Filters -->
@@ -698,8 +698,15 @@ $('pinnedCardContainer').addEventListener('click', flipPinned);
 
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); isFlipped ? nextCard() : flipCard(); }
-  else if (e.key === 'ArrowLeft') prevCard();
-  else if (e.key === 'p' || e.key === 'P') togglePin();
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); prevCard(); }
+  else if (e.key === 'b' || e.key === 'B') { e.preventDefault(); togglePin(); }
+  else if (e.key === 'v' || e.key === 'V') {
+    e.preventDefault();
+    if (pinnedCards.length) {
+      pinnedFlipped ? nextPinned() : flipPinned();
+      $('pinnedDeck').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
 });
 
 updateTotals();
