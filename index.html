@@ -3,720 +3,190 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chapter 9 Flashcards</title>
+<title>Grade 8 Optics Flashcards</title>
+
 <style>
-  :root {
-    --bg:        #070d1a;
-    --surface:   #0d1526;
-    --surface2:  #111e35;
-    --border:    #1a2e50;
-    --border2:   #223659;
-    --blue1:     #1a56db;
-    --blue2:     #2563eb;
-    --blue3:     #3b82f6;
-    --blue4:     #60a5fa;
-    --blue5:     #93c5fd;
-    --blue6:     #bfdbfe;
-    --cyan:      #22d3ee;
-    --text:      #e2e8f0;
-    --muted:     #64748b;
-    --muted2:    #334155;
-    --pin:       #e9a23b;
-    --pin-bg:    rgba(233,162,59,0.12);
-    --pin-glow:  rgba(233,162,59,0.25);
-    --pin-dark:  #78350f;
-    --pin-amber: #f59e0b;
-    --pin-light: #fde68a;
-    --red:       #ef4444;
-  }
+body {
+  font-family: Arial, sans-serif;
+  background:#070d1a;
+  color:#e2e8f0;
+  margin:0;
+  padding:2rem;
+}
 
-  * { margin:0; padding:0; box-sizing:border-box; }
+.container { max-width:900px; margin:auto; }
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: var(--bg);
-    min-height: 100vh;
-    padding: 2rem 1rem 4rem;
-    color: var(--text);
-    background-image:
-      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(37,99,235,0.18) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(15,30,80,0.4) 0%, transparent 60%);
-  }
+.title { text-align:center; font-size:2rem; margin-bottom:1rem; }
 
-  .container { max-width: 54rem; margin: 0 auto; }
+.filters {
+  display:flex; justify-content:center; gap:10px; margin-bottom:1rem;
+}
 
-  /* ─── Header ─── */
-  .header { text-align:center; margin-bottom:2rem; }
-  .title {
-    font-size:2.1rem; font-weight:800; letter-spacing:-0.03em;
-    color: var(--blue6);
-    text-shadow: 0 0 40px rgba(96,165,250,0.3);
-    margin-bottom:.35rem;
-  }
-  .subtitle { color:var(--muted); font-size:.82rem; }
+button {
+  padding:8px 14px;
+  border-radius:8px;
+  border:1px solid #334155;
+  background:#111827;
+  color:white;
+  cursor:pointer;
+}
 
-  /* ─── Divider ─── */
-  .divider {
-    height:1px; background: linear-gradient(90deg, transparent, var(--border2), transparent);
-    margin: 1.75rem 0;
-  }
+button.active { background:#2563eb; }
 
-  /* ─── Section filter ─── */
-  .section-filter {
-    display:flex; gap:.5rem; justify-content:center;
-    flex-wrap:wrap; margin-bottom:1.25rem;
-  }
-  .filter-btn {
-    padding:.32rem .9rem; font-size:.74rem; border-radius:9999px;
-    border:1.5px solid var(--border); background:var(--surface);
-    color:var(--blue5); font-weight:600; cursor:pointer; transition:all .18s;
-    letter-spacing:.02em;
-  }
-  .filter-btn:hover { border-color:var(--blue3); color:var(--blue6); }
-  .filter-btn.active {
-    background: var(--blue1); color:#fff; border-color:var(--blue3);
-    box-shadow: 0 0 14px rgba(59,130,246,.3);
-  }
+.card {
+  background:#111827;
+  padding:2rem;
+  border-radius:12px;
+  text-align:center;
+  min-height:260px;
+  cursor:pointer;
+  border:1px solid #1f2937;
+}
 
-  /* ─── Progress ─── */
-  .progress-container { margin-bottom:1.25rem; }
-  .progress-labels { display:flex; justify-content:space-between; font-size:.78rem; color:var(--muted); margin-bottom:.3rem; }
-  .progress-track {
-    width:100%; background:var(--surface2); border-radius:9999px;
-    height:5px; overflow:hidden; border:1px solid var(--border);
-  }
-  .progress-fill {
-    background: linear-gradient(90deg, var(--blue2), var(--cyan));
-    height:100%; border-radius:9999px; transition:width .35s ease;
-    box-shadow: 0 0 8px rgba(34,211,238,.35);
-  }
+.diagram {
+  margin-top:1rem;
+}
 
-  /* ─── Card wrapper ─── */
-  .card-wrapper { position:relative; margin-bottom:1rem; }
-
-  /* Pin button — top right, pill shape with text */
-  .pin-btn {
-    position:absolute; top:.9rem; right:.9rem; z-index:10;
-    display:flex; align-items:center; gap:.35rem;
-    padding:.35rem .8rem;
-    background:var(--surface); border:1.5px solid var(--border2);
-    border-radius:9999px; cursor:pointer; transition:all .2s;
-    font-size:.72rem; font-weight:700; color:var(--muted);
-    letter-spacing:.04em; text-transform:uppercase;
-    backdrop-filter:blur(6px);
-    user-select:none;
-  }
-  .pin-btn svg { width:12px; height:12px; flex-shrink:0; }
-  .pin-btn:hover { border-color:var(--pin); color:var(--pin); background:var(--pin-bg); }
-  .pin-btn.pinned {
-    border-color:var(--pin); color:var(--pin);
-    background:var(--pin-bg);
-    box-shadow: 0 0 12px var(--pin-glow);
-  }
-  .pin-btn.pinned .pin-label-text::after { content:'ned'; }
-  .pin-btn:not(.pinned) .pin-label-text::after { content:''; }
-
-  /* ─── Flip card ─── */
-  .card-container {
-    width:100%; height:25rem; cursor:pointer;
-    perspective:1100px;
-  }
-  .card-inner {
-    position:relative; width:100%; height:100%;
-    transition:transform .52s cubic-bezier(.4,0,.2,1);
-    transform-style:preserve-3d;
-  }
-  .card-inner.flipped { transform:rotateY(180deg); }
-
-  .card-face {
-    position:absolute; width:100%; height:100%;
-    backface-visibility:hidden; -webkit-backface-visibility:hidden;
-    border-radius:1.1rem; padding:2.5rem 2.25rem;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-  }
-
-  /* Front — dark surface with blue accent top edge */
-  .card-front {
-    background: linear-gradient(170deg, var(--surface2) 0%, var(--surface) 100%);
-    border:1.5px solid var(--border2);
-    box-shadow:
-      0 30px 60px rgba(0,0,0,.55),
-      inset 0 1px 0 rgba(96,165,250,.12),
-      0 0 0 1px rgba(59,130,246,.05);
-  }
-  .card-front::before {
-    content:''; position:absolute; top:0; left:10%; right:10%;
-    height:2px; border-radius:9999px;
-    background: linear-gradient(90deg, transparent, var(--blue3), transparent);
-  }
-
-  /* Back — rich blue gradient */
-  .card-back {
-    background: linear-gradient(145deg, #1a3a7a 0%, #1e3a8a 40%, #1e2e70 100%);
-    border:1.5px solid rgba(96,165,250,.35);
-    box-shadow:
-      0 30px 60px rgba(0,0,0,.55),
-      inset 0 1px 0 rgba(255,255,255,.1);
-    transform:rotateY(180deg);
-  }
-  .card-back::before {
-    content:''; position:absolute; top:0; left:10%; right:10%;
-    height:2px; border-radius:9999px;
-    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-  }
-
-  .card-label {
-    font-size:.65rem; font-weight:800; letter-spacing:.14em;
-    text-transform:uppercase; margin-bottom:.5rem;
-  }
-  .card-front .card-label { color:var(--blue3); }
-  .card-back .card-label { color:var(--cyan); }
-
-  .card-section-tag {
-    font-size:.67rem; font-weight:700; padding:.18rem .65rem;
-    border-radius:9999px; margin-bottom:1rem; letter-spacing:.05em;
-  }
-  .card-front .card-section-tag {
-    background:var(--surface); border:1px solid var(--border2); color:var(--blue4);
-  }
-  .card-back .card-section-tag {
-    background:rgba(255,255,255,.1); color:var(--blue6); border:1px solid rgba(255,255,255,.1);
-  }
-
-  .card-text {
-    font-size:1.1rem; font-weight:500; text-align:center; line-height:1.72;
-    max-width:42rem;
-  }
-  .card-front .card-text { color:var(--text); }
-  .card-back .card-text { color:#fff; }
-
-  .card-hint { margin-top:1.8rem; font-size:.75rem; letter-spacing:.02em; }
-  .card-front .card-hint { color:var(--muted2); }
-  .card-back .card-hint { color:rgba(191,219,254,.5); }
-
-  /* ─── Buttons ─── */
-  .controls { display:flex; align-items:center; justify-content:center; gap:.75rem; margin-bottom:.75rem; }
-  .sec-controls { display:flex; align-items:center; justify-content:center; gap:.75rem; margin-bottom:1rem; }
-
-  button {
-    display:flex; align-items:center; gap:.45rem;
-    padding:.65rem 1.35rem; border:none; border-radius:.6rem;
-    font-size:.93rem; font-weight:600; cursor:pointer; transition:all .18s;
-  }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--blue1), var(--blue2));
-    color:#fff; border:1px solid var(--blue3);
-    box-shadow: 0 4px 16px rgba(37,99,235,.35);
-  }
-  .btn-primary:hover {
-    background: linear-gradient(135deg, var(--blue2), var(--blue3));
-    box-shadow: 0 4px 22px rgba(59,130,246,.5);
-    transform:translateY(-1px);
-  }
-  .btn-ghost {
-    background:var(--surface); color:var(--blue5);
-    border:1.5px solid var(--border2);
-  }
-  .btn-ghost:hover { border-color:var(--blue3); color:var(--blue6); background:var(--surface2); }
-  .btn-sm { padding:.4rem .95rem; font-size:.8rem; }
-
-  /* ─── Pinned section ─── */
-  .pinned-section { margin-top:.5rem; }
-  .pinned-header {
-    display:flex; align-items:center; justify-content:space-between;
-    margin-bottom:1.25rem;
-  }
-  .pinned-title-row { display:flex; align-items:center; gap:.6rem; }
-  .pinned-title { font-size:1rem; font-weight:700; color:var(--blue6); }
-  .pinned-badge {
-    font-size:.68rem; font-weight:700; padding:.15rem .6rem;
-    border-radius:9999px;
-    background:var(--pin-bg); border:1px solid rgba(233,162,59,.3); color:var(--pin);
-  }
-  .clear-btn {
-    font-size:.74rem; padding:.3rem .75rem;
-    background:transparent; border:1px solid var(--border);
-    color:var(--muted); border-radius:.4rem; cursor:pointer; transition:all .18s;
-  }
-  .clear-btn:hover { border-color:var(--red); color:var(--red); }
-
-  .pinned-empty {
-    text-align:center; padding:2.25rem 1rem;
-    color:var(--muted2); font-size:.875rem;
-    border:1.5px dashed var(--border2); border-radius:.9rem;
-  }
-
-  /* Pinned progress */
-  .pin-progress-container { margin-bottom:1rem; }
-  .pin-progress-labels { display:flex; justify-content:space-between; font-size:.76rem; color:var(--muted); margin-bottom:.3rem; }
-  .pin-progress-track {
-    width:100%; background:var(--surface2); border-radius:9999px;
-    height:4px; overflow:hidden; border:1px solid var(--border);
-  }
-  .pin-progress-fill {
-    background: linear-gradient(90deg, var(--pin-dark), var(--pin-amber));
-    height:100%; border-radius:9999px; transition:width .35s ease;
-    box-shadow: 0 0 6px var(--pin-glow);
-  }
-
-  /* Pinned card */
-  .pinned-card-wrapper { position:relative; margin-bottom:1rem; }
-
-  .unpin-btn {
-    position:absolute; top:.8rem; right:.8rem; z-index:10;
-    display:flex; align-items:center; gap:.3rem;
-    padding:.3rem .75rem;
-    background:var(--surface); border:1.5px solid rgba(233,162,59,.4);
-    border-radius:9999px; cursor:pointer; color:var(--pin);
-    font-size:.7rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
-    transition:all .18s; backdrop-filter:blur(6px);
-  }
-  .unpin-btn svg { width:11px; height:11px; }
-  .unpin-btn:hover { border-color:var(--red); color:var(--red); }
-
-  .pinned-card-container {
-    width:100%; height:22rem; cursor:pointer; perspective:1100px;
-  }
-  .pinned-card-inner {
-    position:relative; width:100%; height:100%;
-    transition:transform .52s cubic-bezier(.4,0,.2,1);
-    transform-style:preserve-3d;
-  }
-  .pinned-card-inner.flipped { transform:rotateY(180deg); }
-
-  .pinned-card-face {
-    position:absolute; width:100%; height:100%;
-    backface-visibility:hidden; -webkit-backface-visibility:hidden;
-    border-radius:1.1rem; padding:2rem 2.25rem;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-  }
-
-  .pinned-card-front {
-    background: linear-gradient(170deg, #141e30 0%, #0f1927 100%);
-    border:1.5px solid rgba(233,162,59,.25);
-    box-shadow:
-      0 20px 45px rgba(0,0,0,.5),
-      inset 0 1px 0 rgba(233,162,59,.08);
-  }
-  .pinned-card-front::before {
-    content:''; position:absolute; top:0; left:10%; right:10%;
-    height:2px; border-radius:9999px;
-    background: linear-gradient(90deg, transparent, var(--pin-amber), transparent);
-  }
-  .pinned-card-back {
-    background: linear-gradient(145deg, #3d2000 0%, #2d1800 60%, #231200 100%);
-    border:1.5px solid rgba(245,158,11,.45);
-    box-shadow:
-      0 20px 45px rgba(0,0,0,.5),
-      inset 0 1px 0 rgba(255,255,255,.08);
-    transform:rotateY(180deg);
-  }
-  .pinned-card-back::before {
-    content:''; position:absolute; top:0; left:10%; right:10%;
-    height:2px; border-radius:9999px;
-    background: linear-gradient(90deg, transparent, var(--pin-light), transparent);
-  }
-
-  .pinned-card-front .card-label { color:var(--pin-amber); }
-  .pinned-card-back .card-label { color:var(--pin-light); }
-  .pinned-card-front .card-section-tag { background:#0f1927; border:1px solid rgba(233,162,59,.25); color:var(--pin-amber); }
-  .pinned-card-back .card-section-tag { background:rgba(255,255,255,.08); color:var(--pin-light); border:1px solid rgba(253,230,138,.15); }
-  .pinned-card-front .card-text { color:var(--text); }
-  .pinned-card-back .card-text { color:#fff; }
-  .pinned-card-front .card-hint { color:var(--muted2); }
-  .pinned-card-back .card-hint { color:rgba(253,230,138,.5); }
-
-  .pin-controls { display:flex; align-items:center; justify-content:center; gap:.75rem; margin-bottom:.75rem; }
-  .pin-sec-controls { display:flex; align-items:center; justify-content:center; gap:.75rem; }
-
-  .btn-pin {
-    background: linear-gradient(135deg, #92400e, #b45309);
-    color:#fff; border:1px solid var(--pin-amber);
-    box-shadow: 0 4px 16px rgba(180,83,9,.3);
-  }
-  .btn-pin:hover {
-    background: linear-gradient(135deg, #b45309, var(--pin-amber));
-    box-shadow: 0 4px 22px rgba(245,158,11,.4);
-    transform:translateY(-1px);
-  }
-  .btn-pin-ghost {
-    background:var(--surface); color:var(--pin);
-    border:1.5px solid rgba(233,162,59,.3);
-  }
-  .btn-pin-ghost:hover { border-color:var(--pin-amber); color:var(--pin-amber); background:#141e30; }
+.controls {
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:1rem;
+}
 </style>
 </head>
+
 <body>
+
 <div class="container">
+  <div class="title">Grade 8 Optics Flashcards</div>
 
-  <!-- Header -->
-  <div class="header">
-    <h1 class="title">Chapter 9 — Forces &amp; Fluids</h1>
-    <p class="subtitle"><span id="totalCards">0</span> cards &nbsp;·&nbsp; Click to flip &nbsp;·&nbsp; B to pin &nbsp;·&nbsp; V to cycle pinned</p>
+  <div class="filters">
+    <button class="active" onclick="filter('all',this)">All</button>
+    <button onclick="filter('5.1',this)">Reflection</button>
+    <button onclick="filter('5.2',this)">Refraction</button>
   </div>
 
-  <!-- Filters -->
-  <div class="section-filter">
-    <button class="filter-btn active" onclick="filterSection('all',this)">All Sections</button>
-    <button class="filter-btn" onclick="filterSection('9.1',this)">9.1 Forces &amp; Buoyancy</button>
-    <button class="filter-btn" onclick="filterSection('9.2',this)">9.2 Pressure &amp; Hydraulics</button>
-    <button class="filter-btn" onclick="filterSection('9.3',this)">9.3 Pressure, Volume &amp; Temp</button>
-  </div>
+  <div class="card" id="card" onclick="flip()"></div>
 
-  <!-- Progress -->
-  <div class="progress-container">
-    <div class="progress-labels">
-      <span>Progress</span>
-      <span><span id="currentCard">1</span> / <span id="totalCardsBottom">0</span></span>
-    </div>
-    <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
-  </div>
-
-  <!-- Main Card -->
-  <div class="card-wrapper">
-    <button class="pin-btn" id="mainPinBtn" onclick="togglePin()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 17v5M8 17h8M12 3l2.5 6H19l-4 3.5 1.5 6L12 15l-4.5 3.5 1.5-6L5 9h5.5z"/>
-      </svg>
-      <span id="pinBtnLabel">Pin</span>
-    </button>
-    <div class="card-container" id="cardContainer">
-      <div class="card-inner" id="cardInner">
-        <div class="card-face card-front">
-          <div class="card-label">Question</div>
-          <div class="card-section-tag" id="sectionFront"></div>
-          <div class="card-text" id="questionText"></div>
-          <div class="card-hint">↻&nbsp; Click to reveal answer</div>
-        </div>
-        <div class="card-face card-back">
-          <div class="card-label">Answer</div>
-          <div class="card-section-tag" id="sectionBack"></div>
-          <div class="card-text" id="answerText"></div>
-          <div class="card-hint">↻&nbsp; Click to see question</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main Controls -->
   <div class="controls">
-    <button class="btn-ghost" onclick="prevCard()">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-      Prev
-    </button>
-    <button class="btn-primary" onclick="nextCard()">
-      Next
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
+    <button onclick="prev()">Prev</button>
+    <button onclick="next()">Next</button>
   </div>
-  <div class="sec-controls">
-    <button class="btn-ghost btn-sm" onclick="shuffleCards()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
-      Shuffle
-    </button>
-    <button class="btn-ghost btn-sm" onclick="resetCards()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-      Reset
-    </button>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- Pinned Section -->
-  <div class="pinned-section">
-    <div class="pinned-header">
-      <div class="pinned-title-row">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="#e9a23b" stroke="#e9a23b" stroke-width="1">
-          <path d="M12 17v5M8 17h8M12 3l2.5 6H19l-4 3.5 1.5 6L12 15l-4.5 3.5 1.5-6L5 9h5.5z"/>
-        </svg>
-        <span class="pinned-title">Pinned Cards</span>
-        <span class="pinned-badge" id="pinnedCount">0</span>
-      </div>
-      <button class="clear-btn" onclick="clearAllPins()">Clear all</button>
-    </div>
-
-    <!-- Empty state -->
-    <div id="pinnedEmpty" class="pinned-empty">
-      Pin cards using the <strong style="color:var(--pin)">Pin</strong> button to build a focused review deck here.
-    </div>
-
-    <!-- Pinned deck (hidden until cards pinned) -->
-    <div id="pinnedDeck" style="display:none">
-
-      <!-- Pinned progress -->
-      <div class="pin-progress-container">
-        <div class="pin-progress-labels">
-          <span>Pinned Progress</span>
-          <span><span id="pinnedCurrent">1</span> / <span id="pinnedTotal">0</span></span>
-        </div>
-        <div class="pin-progress-track"><div class="pin-progress-fill" id="pinnedProgressBar"></div></div>
-      </div>
-
-      <!-- Pinned card -->
-      <div class="pinned-card-wrapper">
-        <button class="unpin-btn" onclick="unpinCurrent()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-          Unpin
-        </button>
-        <div class="pinned-card-container" id="pinnedCardContainer">
-          <div class="pinned-card-inner" id="pinnedCardInner">
-            <div class="pinned-card-face pinned-card-front">
-              <div class="card-label">Question</div>
-              <div class="card-section-tag" id="pinnedSectionFront"></div>
-              <div class="card-text" id="pinnedQuestionText"></div>
-              <div class="card-hint">↻&nbsp; Click to reveal answer</div>
-            </div>
-            <div class="pinned-card-face pinned-card-back">
-              <div class="card-label">Answer</div>
-              <div class="card-section-tag" id="pinnedSectionBack"></div>
-              <div class="card-text" id="pinnedAnswerText"></div>
-              <div class="card-hint">↻&nbsp; Click to see question</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pinned controls -->
-      <div class="pin-controls">
-        <button class="btn-pin-ghost" onclick="prevPinned()">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-          Prev
-        </button>
-        <button class="btn-pin" onclick="nextPinned()">
-          Next
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-      </div>
-      <div class="pin-sec-controls">
-        <button class="btn-pin-ghost btn-sm" onclick="shufflePinned()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
-          Shuffle Pinned
-        </button>
-      </div>
-    </div>
-  </div>
-
 </div>
 
 <script>
+
 const allCards = [
-  // ───── Reflection basics ─────
+  // ───── REFLECTION ─────
   {
     s:"5.1",
     q:"What is the Law of Reflection?",
-    a:"The angle of incidence equals the angle of reflection.",
-    img: `<svg viewBox="0 0 300 160">
-      <line x1="150" y1="30" x2="150" y2="140" stroke="#60a5fa" stroke-width="2"/>
-      <line x1="60" y1="60" x2="150" y2="100" stroke="#e2e8f0" stroke-width="2"/>
-      <line x1="150" y1="100" x2="240" y2="60" stroke="#e2e8f0" stroke-width="2"/>
-      <text x="155" y="80" fill="#60a5fa" font-size="10">Normal</text>
-      <text x="80" y="55" fill="#e2e8f0" font-size="10">Incident</text>
-      <text x="210" y="55" fill="#e2e8f0" font-size="10">Reflected</text>
+    a:"Angle of incidence equals angle of reflection.",
+    d:`<svg viewBox="0 0 300 140">
+      <line x1="150" y1="20" x2="150" y2="120" stroke="#60a5fa"/>
+      <line x1="50" y1="50" x2="150" y2="80" stroke="white"/>
+      <line x1="150" y1="80" x2="250" y2="50" stroke="white"/>
     </svg>`
   },
 
   {
     s:"5.1",
-    q:"What is a plane mirror image?",
-    a:"Virtual, upright, same size, and appears behind the mirror.",
-    img: `<svg viewBox="0 0 300 160">
-      <rect x="140" y="20" width="10" height="120" fill="#3b82f6"/>
-      <circle cx="100" cy="80" r="10" fill="#e2e8f0"/>
-      <circle cx="200" cy="80" r="10" fill="#93c5fd" opacity="0.6"/>
-      <line x1="110" y1="80" x2="140" y2="80" stroke="#e2e8f0" stroke-dasharray="4"/>
-      <line x1="150" y1="80" x2="190" y2="80" stroke="#93c5fd" stroke-dasharray="4"/>
+    q:"What is the normal?",
+    a:"An imaginary line perpendicular to the surface.",
+    d:`<svg viewBox="0 0 300 140">
+      <line x1="150" y1="20" x2="150" y2="120" stroke="#60a5fa"/>
+      <line x1="50" y1="80" x2="250" y2="80" stroke="white"/>
     </svg>`
   },
 
   {
     s:"5.1",
-    q:"Concave mirror ray behavior",
-    a:"Parallel rays reflect through focal point.",
-    img: `<svg viewBox="0 0 300 160">
-      <path d="M160 20 Q130 80 160 140" stroke="#60a5fa" fill="none" stroke-width="2"/>
-      <line x1="20" y1="50" x2="160" y2="80" stroke="#e2e8f0"/>
-      <line x1="20" y1="110" x2="160" y2="80" stroke="#e2e8f0"/>
-      <circle cx="160" cy="80" r="4" fill="#22d3ee"/>
-      <text x="165" y="75" fill="#22d3ee" font-size="10">F</text>
+    q:"What is specular reflection?",
+    a:"Reflection from a smooth surface producing a clear image."
+  },
+
+  {
+    s:"5.1",
+    q:"What is diffuse reflection?",
+    a:"Reflection from a rough surface scattering light in many directions."
+  },
+
+  {
+    s:"5.1",
+    q:"Plane mirror image characteristics",
+    a:"Same size, upright, virtual, same distance behind mirror."
+  },
+
+  // ───── REFRACTION ─────
+  {
+    s:"5.2",
+    q:"What is refraction?",
+    a:"Bending of light when it moves between different materials.",
+    d:`<svg viewBox="0 0 300 140">
+      <line x1="150" y1="0" x2="150" y2="140" stroke="#3b82f6"/>
+      <line x1="60" y1="40" x2="150" y2="70" stroke="white"/>
+      <line x1="150" y1="70" x2="240" y2="110" stroke="#60a5fa"/>
     </svg>`
   },
 
   {
     s:"5.2",
-    q:"What is refraction?",
-    a:"The bending of light when it passes between media.",
-    img: `<svg viewBox="0 0 300 160">
-      <rect x="0" y="80" width="300" height="80" fill="#0f172a"/>
-      <line x1="80" y1="20" x2="150" y2="80" stroke="#e2e8f0"/>
-      <line x1="150" y1="80" x2="230" y2="130" stroke="#60a5fa"/>
-      <line x1="150" y1="0" x2="150" y2="160" stroke="#3b82f6"/>
-      <text x="155" y="75" fill="#3b82f6" font-size="10">Normal</text>
-    </svg>`
+    q:"What happens when light enters a more dense medium?",
+    a:"It slows down and bends toward the normal."
   },
 
-  // ───── keep your existing simple cards (example) ─────
-  {s:"5.1",q:"What is an incident ray?",a:"A ray that hits a surface."},
-  {s:"5.1",q:"What is a reflected ray?",a:"A ray that bounces off a surface."},
-  {s:"5.1",q:"What is the normal?",a:"A line perpendicular to the surface."},
-  {s:"5.1",q:"What is angle of incidence?",a:"Angle between incident ray and normal."},
-  {s:"5.1",q:"What is angle of reflection?",a:"Angle between reflected ray and normal."}
+  {
+    s:"5.2",
+    q:"What happens when light enters a less dense medium?",
+    a:"It speeds up and bends away from the normal."
+  },
+
+  {
+    s:"5.2",
+    q:"Bent stick effect",
+    a:"Light refracts at water-air boundary making objects appear shifted."
+  }
 ];
 
-let cards = [...allCards];
-let activeFilter = 'all';
-let currentIndex = 0;
-let isFlipped = false;
-let pinnedIds = new Set();
-let pinnedCards = [];
-let pinnedIndex = 0;
-let pinnedFlipped = false;
+let index = 0;
+let flipped = false;
+let filtered = [...allCards];
 
-function $(id){ return document.getElementById(id); }
-
-function updateMainCard() {
-  const c = cards[currentIndex];
-  $('questionText').textContent = c.q;
-  $('answerText').textContent = c.a;
-  $('sectionFront').textContent = 'Section ' + c.s;
-  $('sectionBack').textContent = 'Section ' + c.s;
-  $('currentCard').textContent = currentIndex + 1;
-  $('progressBar').style.width = ((currentIndex + 1) / cards.length * 100) + '%';
-  const isPinned = pinnedIds.has(c.q);
-  $('mainPinBtn').classList.toggle('pinned', isPinned);
-  $('pinBtnLabel').textContent = isPinned ? 'Pinned' : 'Pin';
+function render(){
+  const c = filtered[index];
+  document.getElementById("card").innerHTML = flipped
+    ? `<h2>Answer</h2><p>${c.a}</p>`
+    : `<h2>Question</h2><p>${c.q}</p>` + (c.d ? `<div class="diagram">${c.d}</div>` : "");
 }
 
-function updateTotals() {
-  $('totalCards').textContent = cards.length;
-  $('totalCardsBottom').textContent = cards.length;
+function flip(){ flipped = !flipped; render(); }
+
+function next(){
+  index = (index + 1) % filtered.length;
+  flipped = false;
+  render();
 }
 
-function updatePinnedDeck() {
-  pinnedCards = allCards.filter(c => pinnedIds.has(c.q));
-  $('pinnedCount').textContent = pinnedCards.length;
-  if (pinnedCards.length === 0) {
-    $('pinnedEmpty').style.display = 'block';
-    $('pinnedDeck').style.display = 'none';
-  } else {
-    $('pinnedEmpty').style.display = 'none';
-    $('pinnedDeck').style.display = 'block';
-    if (pinnedIndex >= pinnedCards.length) pinnedIndex = Math.max(0, pinnedCards.length - 1);
-    updatePinnedCard();
-  }
+function prev(){
+  index = (index - 1 + filtered.length) % filtered.length;
+  flipped = false;
+  render();
 }
 
-function updatePinnedCard() {
-  if (!pinnedCards.length) return;
-  const c = pinnedCards[pinnedIndex];
-  $('pinnedQuestionText').textContent = c.q;
-  $('pinnedAnswerText').textContent = c.a;
-  $('pinnedSectionFront').textContent = 'Section ' + c.s;
-  $('pinnedSectionBack').textContent = 'Section ' + c.s;
-  $('pinnedCurrent').textContent = pinnedIndex + 1;
-  $('pinnedTotal').textContent = pinnedCards.length;
-  $('pinnedProgressBar').style.width = ((pinnedIndex + 1) / pinnedCards.length * 100) + '%';
+function filter(type,btn){
+  document.querySelectorAll("button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+
+  filtered = type === "all" ? allCards : allCards.filter(c=>c.s===type);
+  index = 0;
+  flipped = false;
+  render();
 }
 
-function filterSection(s, btn) {
-  activeFilter = s;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  cards = s === 'all' ? [...allCards] : allCards.filter(c => c.s === s);
-  currentIndex = 0; isFlipped = false;
-  $('cardInner').classList.remove('flipped');
-  updateTotals(); updateMainCard();
-}
+render();
 
-function flipCard() {
-  isFlipped = !isFlipped;
-  $('cardInner').classList.toggle('flipped', isFlipped);
-}
-function nextCard() {
-  isFlipped = false; $('cardInner').classList.remove('flipped');
-  currentIndex = (currentIndex + 1) % cards.length;
-  updateMainCard();
-}
-function prevCard() {
-  isFlipped = false; $('cardInner').classList.remove('flipped');
-  currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-  updateMainCard();
-}
-function shuffleCards() {
-  cards = [...cards].sort(() => Math.random() - 0.5);
-  currentIndex = 0; isFlipped = false;
-  $('cardInner').classList.remove('flipped');
-  updateMainCard();
-}
-function resetCards() {
-  cards = activeFilter === 'all' ? [...allCards] : allCards.filter(c => c.s === activeFilter);
-  currentIndex = 0; isFlipped = false;
-  $('cardInner').classList.remove('flipped');
-  updateTotals(); updateMainCard();
-}
-
-function togglePin() {
-  const q = cards[currentIndex].q;
-  if (pinnedIds.has(q)) pinnedIds.delete(q);
-  else pinnedIds.add(q);
-  updateMainCard();
-  updatePinnedDeck();
-}
-function unpinCurrent() {
-  if (!pinnedCards.length) return;
-  pinnedIds.delete(pinnedCards[pinnedIndex].q);
-  pinnedFlipped = false;
-  $('pinnedCardInner').classList.remove('flipped');
-  updateMainCard();
-  updatePinnedDeck();
-}
-function clearAllPins() {
-  pinnedIds.clear();
-  pinnedIndex = 0; pinnedFlipped = false;
-  $('pinnedCardInner').classList.remove('flipped');
-  updateMainCard();
-  updatePinnedDeck();
-}
-
-function flipPinned() {
-  pinnedFlipped = !pinnedFlipped;
-  $('pinnedCardInner').classList.toggle('flipped', pinnedFlipped);
-}
-function nextPinned() {
-  pinnedFlipped = false; $('pinnedCardInner').classList.remove('flipped');
-  pinnedIndex = (pinnedIndex + 1) % pinnedCards.length;
-  updatePinnedCard();
-}
-function prevPinned() {
-  pinnedFlipped = false; $('pinnedCardInner').classList.remove('flipped');
-  pinnedIndex = (pinnedIndex - 1 + pinnedCards.length) % pinnedCards.length;
-  updatePinnedCard();
-}
-function shufflePinned() {
-  pinnedCards = [...pinnedCards].sort(() => Math.random() - 0.5);
-  pinnedIndex = 0; pinnedFlipped = false;
-  $('pinnedCardInner').classList.remove('flipped');
-  updatePinnedCard();
-}
-
-$('cardContainer').addEventListener('click', flipCard);
-$('pinnedCardContainer').addEventListener('click', flipPinned);
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); isFlipped ? nextCard() : flipCard(); }
-  else if (e.key === 'ArrowLeft') { e.preventDefault(); prevCard(); }
-  else if (e.key === 'b' || e.key === 'B') { e.preventDefault(); togglePin(); }
-  else if (e.key === 'v' || e.key === 'V') {
-    e.preventDefault();
-    if (pinnedCards.length) {
-      pinnedFlipped ? nextPinned() : flipPinned();
-      $('pinnedDeck').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }
-});
-
-updateTotals();
-updateMainCard();
-updatePinnedDeck();
 </script>
+
 </body>
 </html>
