@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chapter 9 Flashcards</title>
+<title>Optics Unit 2 Flashcards</title>
 <style>
   :root {
     --bg:        #070d1a;
@@ -29,9 +29,7 @@
     --pin-light: #fde68a;
     --red:       #ef4444;
   }
-
   * { margin:0; padding:0; box-sizing:border-box; }
-
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: var(--bg);
@@ -42,10 +40,7 @@
       radial-gradient(ellipse 80% 50% at 50% -10%, rgba(37,99,235,0.18) 0%, transparent 60%),
       radial-gradient(ellipse 60% 40% at 80% 100%, rgba(15,30,80,0.4) 0%, transparent 60%);
   }
-
   .container { max-width: 54rem; margin: 0 auto; }
-
-  /* ─── Header ─── */
   .header { text-align:center; margin-bottom:2rem; }
   .title {
     font-size:2.1rem; font-weight:800; letter-spacing:-0.03em;
@@ -54,47 +49,20 @@
     margin-bottom:.35rem;
   }
   .subtitle { color:var(--muted); font-size:.82rem; }
-
-  /* ─── Divider ─── */
-  .divider {
-    height:1px; background: linear-gradient(90deg, transparent, var(--border2), transparent);
-    margin: 1.75rem 0;
-  }
-
-  /* ─── Section filter ─── */
-  .section-filter {
-    display:flex; gap:.5rem; justify-content:center;
-    flex-wrap:wrap; margin-bottom:1.25rem;
-  }
+  .divider { height:1px; background: linear-gradient(90deg, transparent, var(--border2), transparent); margin: 1.75rem 0; }
+  .section-filter { display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:1.25rem; }
   .filter-btn {
     padding:.32rem .9rem; font-size:.74rem; border-radius:9999px;
     border:1.5px solid var(--border); background:var(--surface);
-    color:var(--blue5); font-weight:600; cursor:pointer; transition:all .18s;
-    letter-spacing:.02em;
+    color:var(--blue5); font-weight:600; cursor:pointer; transition:all .18s; letter-spacing:.02em;
   }
   .filter-btn:hover { border-color:var(--blue3); color:var(--blue6); }
-  .filter-btn.active {
-    background: var(--blue1); color:#fff; border-color:var(--blue3);
-    box-shadow: 0 0 14px rgba(59,130,246,.3);
-  }
-
-  /* ─── Progress ─── */
+  .filter-btn.active { background: var(--blue1); color:#fff; border-color:var(--blue3); box-shadow: 0 0 14px rgba(59,130,246,.3); }
   .progress-container { margin-bottom:1.25rem; }
   .progress-labels { display:flex; justify-content:space-between; font-size:.78rem; color:var(--muted); margin-bottom:.3rem; }
-  .progress-track {
-    width:100%; background:var(--surface2); border-radius:9999px;
-    height:5px; overflow:hidden; border:1px solid var(--border);
-  }
-  .progress-fill {
-    background: linear-gradient(90deg, var(--blue2), var(--cyan));
-    height:100%; border-radius:9999px; transition:width .35s ease;
-    box-shadow: 0 0 8px rgba(34,211,238,.35);
-  }
-
-  /* ─── Card wrapper ─── */
+  .progress-track { width:100%; background:var(--surface2); border-radius:9999px; height:5px; overflow:hidden; border:1px solid var(--border); }
+  .progress-fill { background: linear-gradient(90deg, var(--blue2), var(--cyan)); height:100%; border-radius:9999px; transition:width .35s ease; box-shadow: 0 0 8px rgba(34,211,238,.35); }
   .card-wrapper { position:relative; margin-bottom:1rem; }
-
-  /* Pin button — top right, pill shape with text */
   .pin-btn {
     position:absolute; top:.9rem; right:.9rem; z-index:10;
     display:flex; align-items:center; gap:.35rem;
@@ -103,220 +71,63 @@
     border-radius:9999px; cursor:pointer; transition:all .2s;
     font-size:.72rem; font-weight:700; color:var(--muted);
     letter-spacing:.04em; text-transform:uppercase;
-    backdrop-filter:blur(6px);
-    user-select:none;
+    backdrop-filter:blur(6px); user-select:none;
   }
   .pin-btn svg { width:12px; height:12px; flex-shrink:0; }
   .pin-btn:hover { border-color:var(--pin); color:var(--pin); background:var(--pin-bg); }
-  .pin-btn.pinned {
-    border-color:var(--pin); color:var(--pin);
-    background:var(--pin-bg);
-    box-shadow: 0 0 12px var(--pin-glow);
-  }
-  .pin-btn.pinned .pin-label-text::after { content:'ned'; }
-  .pin-btn:not(.pinned) .pin-label-text::after { content:''; }
-
-  /* ─── Flip card ─── */
-  .card-container {
-    width:100%; height:25rem; cursor:pointer;
-    perspective:1100px;
-  }
-  .card-inner {
-    position:relative; width:100%; height:100%;
-    transition:transform .52s cubic-bezier(.4,0,.2,1);
-    transform-style:preserve-3d;
-  }
+  .pin-btn.pinned { border-color:var(--pin); color:var(--pin); background:var(--pin-bg); box-shadow: 0 0 12px var(--pin-glow); }
+  .card-container { width:100%; height:25rem; cursor:pointer; perspective:1100px; }
+  .card-inner { position:relative; width:100%; height:100%; transition:transform .52s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d; }
   .card-inner.flipped { transform:rotateY(180deg); }
-
-  .card-face {
-    position:absolute; width:100%; height:100%;
-    backface-visibility:hidden; -webkit-backface-visibility:hidden;
-    border-radius:1.1rem; padding:2.5rem 2.25rem;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-  }
-
-  /* Front — dark surface with blue accent top edge */
-  .card-front {
-    background: linear-gradient(170deg, var(--surface2) 0%, var(--surface) 100%);
-    border:1.5px solid var(--border2);
-    box-shadow:
-      0 30px 60px rgba(0,0,0,.55),
-      inset 0 1px 0 rgba(96,165,250,.12),
-      0 0 0 1px rgba(59,130,246,.05);
-  }
-  .card-front::before {
-    content:''; position:absolute; top:0; left:10%; right:10%;
-    height:2px; border-radius:9999px;
-    background: linear-gradient(90deg, transparent, var(--blue3), transparent);
-  }
-
-  /* Back — rich blue gradient */
-  .card-back {
-    background: linear-gradient(145deg, #1a3a7a 0%, #1e3a8a 40%, #1e2e70 100%);
-    border:1.5px solid rgba(96,165,250,.35);
-    box-shadow:
-      0 30px 60px rgba(0,0,0,.55),
-      inset 0 1px 0 rgba(255,255,255,.1);
-    transform:rotateY(180deg);
-  }
-  .card-back::before {
-    content:''; position:absolute; top:0; left:10%; right:10%;
-    height:2px; border-radius:9999px;
-    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-  }
-
-  .card-label {
-    font-size:.65rem; font-weight:800; letter-spacing:.14em;
-    text-transform:uppercase; margin-bottom:.5rem;
-  }
+  .card-face { position:absolute; width:100%; height:100%; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:1.1rem; padding:2.5rem 2.25rem; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .card-front { background: linear-gradient(170deg, var(--surface2) 0%, var(--surface) 100%); border:1.5px solid var(--border2); box-shadow: 0 30px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(96,165,250,.12); }
+  .card-front::before { content:''; position:absolute; top:0; left:10%; right:10%; height:2px; border-radius:9999px; background: linear-gradient(90deg, transparent, var(--blue3), transparent); }
+  .card-back { background: linear-gradient(145deg, #1a3a7a 0%, #1e3a8a 40%, #1e2e70 100%); border:1.5px solid rgba(96,165,250,.35); box-shadow: 0 30px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.1); transform:rotateY(180deg); }
+  .card-back::before { content:''; position:absolute; top:0; left:10%; right:10%; height:2px; border-radius:9999px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); }
+  .card-label { font-size:.65rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; margin-bottom:.5rem; }
   .card-front .card-label { color:var(--blue3); }
   .card-back .card-label { color:var(--cyan); }
-
-  .card-section-tag {
-    font-size:.67rem; font-weight:700; padding:.18rem .65rem;
-    border-radius:9999px; margin-bottom:1rem; letter-spacing:.05em;
-  }
-  .card-front .card-section-tag {
-    background:var(--surface); border:1px solid var(--border2); color:var(--blue4);
-  }
-  .card-back .card-section-tag {
-    background:rgba(255,255,255,.1); color:var(--blue6); border:1px solid rgba(255,255,255,.1);
-  }
-
-  .card-text {
-    font-size:1.1rem; font-weight:500; text-align:center; line-height:1.72;
-    max-width:42rem;
-  }
+  .card-section-tag { font-size:.67rem; font-weight:700; padding:.18rem .65rem; border-radius:9999px; margin-bottom:1rem; letter-spacing:.05em; }
+  .card-front .card-section-tag { background:var(--surface); border:1px solid var(--border2); color:var(--blue4); }
+  .card-back .card-section-tag { background:rgba(255,255,255,.1); color:var(--blue6); border:1px solid rgba(255,255,255,.1); }
+  .card-text { font-size:1.1rem; font-weight:500; text-align:center; line-height:1.72; max-width:42rem; }
   .card-front .card-text { color:var(--text); }
   .card-back .card-text { color:#fff; }
-
   .card-hint { margin-top:1.8rem; font-size:.75rem; letter-spacing:.02em; }
   .card-front .card-hint { color:var(--muted2); }
   .card-back .card-hint { color:rgba(191,219,254,.5); }
-
-  /* ─── Buttons ─── */
   .controls { display:flex; align-items:center; justify-content:center; gap:.75rem; margin-bottom:.75rem; }
   .sec-controls { display:flex; align-items:center; justify-content:center; gap:.75rem; margin-bottom:1rem; }
-
-  button {
-    display:flex; align-items:center; gap:.45rem;
-    padding:.65rem 1.35rem; border:none; border-radius:.6rem;
-    font-size:.93rem; font-weight:600; cursor:pointer; transition:all .18s;
-  }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--blue1), var(--blue2));
-    color:#fff; border:1px solid var(--blue3);
-    box-shadow: 0 4px 16px rgba(37,99,235,.35);
-  }
-  .btn-primary:hover {
-    background: linear-gradient(135deg, var(--blue2), var(--blue3));
-    box-shadow: 0 4px 22px rgba(59,130,246,.5);
-    transform:translateY(-1px);
-  }
-  .btn-ghost {
-    background:var(--surface); color:var(--blue5);
-    border:1.5px solid var(--border2);
-  }
+  button { display:flex; align-items:center; gap:.45rem; padding:.65rem 1.35rem; border:none; border-radius:.6rem; font-size:.93rem; font-weight:600; cursor:pointer; transition:all .18s; }
+  .btn-primary { background: linear-gradient(135deg, var(--blue1), var(--blue2)); color:#fff; border:1px solid var(--blue3); box-shadow: 0 4px 16px rgba(37,99,235,.35); }
+  .btn-primary:hover { background: linear-gradient(135deg, var(--blue2), var(--blue3)); box-shadow: 0 4px 22px rgba(59,130,246,.5); transform:translateY(-1px); }
+  .btn-ghost { background:var(--surface); color:var(--blue5); border:1.5px solid var(--border2); }
   .btn-ghost:hover { border-color:var(--blue3); color:var(--blue6); background:var(--surface2); }
   .btn-sm { padding:.4rem .95rem; font-size:.8rem; }
-
-  /* ─── Pinned section ─── */
   .pinned-section { margin-top:.5rem; }
-  .pinned-header {
-    display:flex; align-items:center; justify-content:space-between;
-    margin-bottom:1.25rem;
-  }
+  .pinned-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem; }
   .pinned-title-row { display:flex; align-items:center; gap:.6rem; }
   .pinned-title { font-size:1rem; font-weight:700; color:var(--blue6); }
-  .pinned-badge {
-    font-size:.68rem; font-weight:700; padding:.15rem .6rem;
-    border-radius:9999px;
-    background:var(--pin-bg); border:1px solid rgba(233,162,59,.3); color:var(--pin);
-  }
-  .clear-btn {
-    font-size:.74rem; padding:.3rem .75rem;
-    background:transparent; border:1px solid var(--border);
-    color:var(--muted); border-radius:.4rem; cursor:pointer; transition:all .18s;
-  }
+  .pinned-badge { font-size:.68rem; font-weight:700; padding:.15rem .6rem; border-radius:9999px; background:var(--pin-bg); border:1px solid rgba(233,162,59,.3); color:var(--pin); }
+  .clear-btn { font-size:.74rem; padding:.3rem .75rem; background:transparent; border:1px solid var(--border); color:var(--muted); border-radius:.4rem; cursor:pointer; transition:all .18s; }
   .clear-btn:hover { border-color:var(--red); color:var(--red); }
-
-  .pinned-empty {
-    text-align:center; padding:2.25rem 1rem;
-    color:var(--muted2); font-size:.875rem;
-    border:1.5px dashed var(--border2); border-radius:.9rem;
-  }
-
-  /* Pinned progress */
+  .pinned-empty { text-align:center; padding:2.25rem 1rem; color:var(--muted2); font-size:.875rem; border:1.5px dashed var(--border2); border-radius:.9rem; }
   .pin-progress-container { margin-bottom:1rem; }
   .pin-progress-labels { display:flex; justify-content:space-between; font-size:.76rem; color:var(--muted); margin-bottom:.3rem; }
-  .pin-progress-track {
-    width:100%; background:var(--surface2); border-radius:9999px;
-    height:4px; overflow:hidden; border:1px solid var(--border);
-  }
-  .pin-progress-fill {
-    background: linear-gradient(90deg, var(--pin-dark), var(--pin-amber));
-    height:100%; border-radius:9999px; transition:width .35s ease;
-    box-shadow: 0 0 6px var(--pin-glow);
-  }
-
-  /* Pinned card */
+  .pin-progress-track { width:100%; background:var(--surface2); border-radius:9999px; height:4px; overflow:hidden; border:1px solid var(--border); }
+  .pin-progress-fill { background: linear-gradient(90deg, var(--pin-dark), var(--pin-amber)); height:100%; border-radius:9999px; transition:width .35s ease; box-shadow: 0 0 6px var(--pin-glow); }
   .pinned-card-wrapper { position:relative; margin-bottom:1rem; }
-
-  .unpin-btn {
-    position:absolute; top:.8rem; right:.8rem; z-index:10;
-    display:flex; align-items:center; gap:.3rem;
-    padding:.3rem .75rem;
-    background:var(--surface); border:1.5px solid rgba(233,162,59,.4);
-    border-radius:9999px; cursor:pointer; color:var(--pin);
-    font-size:.7rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
-    transition:all .18s; backdrop-filter:blur(6px);
-  }
+  .unpin-btn { position:absolute; top:.8rem; right:.8rem; z-index:10; display:flex; align-items:center; gap:.3rem; padding:.3rem .75rem; background:var(--surface); border:1.5px solid rgba(233,162,59,.4); border-radius:9999px; cursor:pointer; color:var(--pin); font-size:.7rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; transition:all .18s; backdrop-filter:blur(6px); }
   .unpin-btn svg { width:11px; height:11px; }
   .unpin-btn:hover { border-color:var(--red); color:var(--red); }
-
-  .pinned-card-container {
-    width:100%; height:22rem; cursor:pointer; perspective:1100px;
-  }
-  .pinned-card-inner {
-    position:relative; width:100%; height:100%;
-    transition:transform .52s cubic-bezier(.4,0,.2,1);
-    transform-style:preserve-3d;
-  }
+  .pinned-card-container { width:100%; height:22rem; cursor:pointer; perspective:1100px; }
+  .pinned-card-inner { position:relative; width:100%; height:100%; transition:transform .52s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d; }
   .pinned-card-inner.flipped { transform:rotateY(180deg); }
-
-  .pinned-card-face {
-    position:absolute; width:100%; height:100%;
-    backface-visibility:hidden; -webkit-backface-visibility:hidden;
-    border-radius:1.1rem; padding:2rem 2.25rem;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-  }
-
-  .pinned-card-front {
-    background: linear-gradient(170deg, #141e30 0%, #0f1927 100%);
-    border:1.5px solid rgba(233,162,59,.25);
-    box-shadow:
-      0 20px 45px rgba(0,0,0,.5),
-      inset 0 1px 0 rgba(233,162,59,.08);
-  }
-  .pinned-card-front::before {
-    content:''; position:absolute; top:0; left:10%; right:10%;
-    height:2px; border-radius:9999px;
-    background: linear-gradient(90deg, transparent, var(--pin-amber), transparent);
-  }
-  .pinned-card-back {
-    background: linear-gradient(145deg, #3d2000 0%, #2d1800 60%, #231200 100%);
-    border:1.5px solid rgba(245,158,11,.45);
-    box-shadow:
-      0 20px 45px rgba(0,0,0,.5),
-      inset 0 1px 0 rgba(255,255,255,.08);
-    transform:rotateY(180deg);
-  }
-  .pinned-card-back::before {
-    content:''; position:absolute; top:0; left:10%; right:10%;
-    height:2px; border-radius:9999px;
-    background: linear-gradient(90deg, transparent, var(--pin-light), transparent);
-  }
-
+  .pinned-card-face { position:absolute; width:100%; height:100%; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:1.1rem; padding:2rem 2.25rem; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .pinned-card-front { background: linear-gradient(170deg, #141e30 0%, #0f1927 100%); border:1.5px solid rgba(233,162,59,.25); box-shadow: 0 20px 45px rgba(0,0,0,.5), inset 0 1px 0 rgba(233,162,59,.08); }
+  .pinned-card-front::before { content:''; position:absolute; top:0; left:10%; right:10%; height:2px; border-radius:9999px; background: linear-gradient(90deg, transparent, var(--pin-amber), transparent); }
+  .pinned-card-back { background: linear-gradient(145deg, #3d2000 0%, #2d1800 60%, #231200 100%); border:1.5px solid rgba(245,158,11,.45); box-shadow: 0 20px 45px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.08); transform:rotateY(180deg); }
+  .pinned-card-back::before { content:''; position:absolute; top:0; left:10%; right:10%; height:2px; border-radius:9999px; background: linear-gradient(90deg, transparent, var(--pin-light), transparent); }
   .pinned-card-front .card-label { color:var(--pin-amber); }
   .pinned-card-back .card-label { color:var(--pin-light); }
   .pinned-card-front .card-section-tag { background:#0f1927; border:1px solid rgba(233,162,59,.25); color:var(--pin-amber); }
@@ -325,45 +136,30 @@
   .pinned-card-back .card-text { color:#fff; }
   .pinned-card-front .card-hint { color:var(--muted2); }
   .pinned-card-back .card-hint { color:rgba(253,230,138,.5); }
-
   .pin-controls { display:flex; align-items:center; justify-content:center; gap:.75rem; margin-bottom:.75rem; }
   .pin-sec-controls { display:flex; align-items:center; justify-content:center; gap:.75rem; }
-
-  .btn-pin {
-    background: linear-gradient(135deg, #92400e, #b45309);
-    color:#fff; border:1px solid var(--pin-amber);
-    box-shadow: 0 4px 16px rgba(180,83,9,.3);
-  }
-  .btn-pin:hover {
-    background: linear-gradient(135deg, #b45309, var(--pin-amber));
-    box-shadow: 0 4px 22px rgba(245,158,11,.4);
-    transform:translateY(-1px);
-  }
-  .btn-pin-ghost {
-    background:var(--surface); color:var(--pin);
-    border:1.5px solid rgba(233,162,59,.3);
-  }
+  .btn-pin { background: linear-gradient(135deg, #92400e, #b45309); color:#fff; border:1px solid var(--pin-amber); box-shadow: 0 4px 16px rgba(180,83,9,.3); }
+  .btn-pin:hover { background: linear-gradient(135deg, #b45309, var(--pin-amber)); box-shadow: 0 4px 22px rgba(245,158,11,.4); transform:translateY(-1px); }
+  .btn-pin-ghost { background:var(--surface); color:var(--pin); border:1.5px solid rgba(233,162,59,.3); }
   .btn-pin-ghost:hover { border-color:var(--pin-amber); color:var(--pin-amber); background:#141e30; }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <!-- Header -->
   <div class="header">
-    <h1 class="title">Chapter 9 — Forces &amp; Fluids</h1>
-    <p class="subtitle"><span id="totalCards">0</span> cards &nbsp;·&nbsp; Click to flip &nbsp;·&nbsp; B to pin &nbsp;·&nbsp; V to cycle pinned</p>
+    <h1 class="title">Unit 2 — Optics</h1>
+    <p class="subtitle"><span id="totalCards">0</span> cards &nbsp;·&nbsp; Space to flip &nbsp;·&nbsp; B to pin &nbsp;·&nbsp; V to flip pinned</p>
   </div>
 
-  <!-- Filters -->
   <div class="section-filter">
-    <button class="filter-btn active" onclick="filterSection('all',this)">All Sections</button>
-    <button class="filter-btn" onclick="filterSection('9.1',this)">9.1 Forces &amp; Buoyancy</button>
-    <button class="filter-btn" onclick="filterSection('9.2',this)">9.2 Pressure &amp; Hydraulics</button>
-    <button class="filter-btn" onclick="filterSection('9.3',this)">9.3 Pressure, Volume &amp; Temp</button>
+    <button class="filter-btn active" onclick="filterSection('all',this)">All Topics</button>
+    <button class="filter-btn" onclick="filterSection('5.1',this)">5.1 Ray Model &amp; Reflection</button>
+    <button class="filter-btn" onclick="filterSection('5.2',this)">5.2 Plane Mirrors</button>
+    <button class="filter-btn" onclick="filterSection('5.3',this)">5.3 Concave &amp; Convex Mirrors</button>
+    <button class="filter-btn" onclick="filterSection('5.4',this)">5.4 Refraction</button>
   </div>
 
-  <!-- Progress -->
   <div class="progress-container">
     <div class="progress-labels">
       <span>Progress</span>
@@ -372,7 +168,6 @@
     <div class="progress-track"><div class="progress-fill" id="progressBar"></div></div>
   </div>
 
-  <!-- Main Card -->
   <div class="card-wrapper">
     <button class="pin-btn" id="mainPinBtn" onclick="togglePin()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -386,19 +181,18 @@
           <div class="card-label">Question</div>
           <div class="card-section-tag" id="sectionFront"></div>
           <div class="card-text" id="questionText"></div>
-          <div class="card-hint">↻&nbsp; Click to reveal answer</div>
+          <div class="card-hint">↻ Click to reveal answer</div>
         </div>
         <div class="card-face card-back">
           <div class="card-label">Answer</div>
           <div class="card-section-tag" id="sectionBack"></div>
           <div class="card-text" id="answerText"></div>
-          <div class="card-hint">↻&nbsp; Click to see question</div>
+          <div class="card-hint">↻ Click to see question</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Main Controls -->
   <div class="controls">
     <button class="btn-ghost" onclick="prevCard()">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
@@ -422,7 +216,6 @@
 
   <div class="divider"></div>
 
-  <!-- Pinned Section -->
   <div class="pinned-section">
     <div class="pinned-header">
       <div class="pinned-title-row">
@@ -435,15 +228,11 @@
       <button class="clear-btn" onclick="clearAllPins()">Clear all</button>
     </div>
 
-    <!-- Empty state -->
     <div id="pinnedEmpty" class="pinned-empty">
       Pin cards using the <strong style="color:var(--pin)">Pin</strong> button to build a focused review deck here.
     </div>
 
-    <!-- Pinned deck (hidden until cards pinned) -->
     <div id="pinnedDeck" style="display:none">
-
-      <!-- Pinned progress -->
       <div class="pin-progress-container">
         <div class="pin-progress-labels">
           <span>Pinned Progress</span>
@@ -452,7 +241,6 @@
         <div class="pin-progress-track"><div class="pin-progress-fill" id="pinnedProgressBar"></div></div>
       </div>
 
-      <!-- Pinned card -->
       <div class="pinned-card-wrapper">
         <button class="unpin-btn" onclick="unpinCurrent()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -464,19 +252,18 @@
               <div class="card-label">Question</div>
               <div class="card-section-tag" id="pinnedSectionFront"></div>
               <div class="card-text" id="pinnedQuestionText"></div>
-              <div class="card-hint">↻&nbsp; Click to reveal answer</div>
+              <div class="card-hint">↻ Click to reveal answer</div>
             </div>
             <div class="pinned-card-face pinned-card-back">
               <div class="card-label">Answer</div>
               <div class="card-section-tag" id="pinnedSectionBack"></div>
               <div class="card-text" id="pinnedAnswerText"></div>
-              <div class="card-hint">↻&nbsp; Click to see question</div>
+              <div class="card-hint">↻ Click to see question</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Pinned controls -->
       <div class="pin-controls">
         <button class="btn-pin-ghost" onclick="prevPinned()">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
@@ -500,61 +287,66 @@
 
 <script>
 const allCards = [
-  {s:"9.1",q:"What is a force?",a:"Anything that causes a change in the motion of an object (a push or a pull)."},
-  {s:"9.1",q:"What are balanced forces?",a:"Forces equal in strength and opposite in direction — they cause no change in motion."},
-  {s:"9.1",q:"What are unbalanced forces?",a:"Forces unequal in strength — they cause a change in the speed or direction of an object."},
-  {s:"9.1",q:"What is mass?",a:"The amount of matter in an object. Stays the same anywhere in the universe. Measured in kilograms (kg)."},
-  {s:"9.1",q:"What is weight?",a:"The measure of the gravitational pull (force) acting on an object. Changes with location. Measured in Newtons (N)."},
-  {s:"9.1",q:"How is weight different from mass?",a:"Mass is constant everywhere; weight changes with gravity. On the Moon, weight is 1/6 of Earth weight, but mass stays the same."},
-  {s:"9.1",q:"What is buoyancy (buoyant force)?",a:"The upward force on an object submerged in or floating on a fluid."},
-  {s:"9.1",q:"When does an object float?",a:"When the buoyant force equals the force of gravity — when the mass of displaced fluid equals the total mass of the object."},
-  {s:"9.1",q:"When does an object sink?",a:"When the object's weight is greater than the buoyant force — it is denser than the fluid it displaces."},
-  {s:"9.1",q:"What is neutral buoyancy?",a:"When buoyant force exactly equals the weight of the object — it neither rises nor sinks."},
-  {s:"9.1",q:"What is Archimedes' principle?",a:"The buoyant force on an object equals the weight of the fluid the object displaces."},
-  {s:"9.1",q:"Why is it easier to float in salt water than fresh water?",a:"Salt water is denser (1.03 g/mL vs 1.00 g/mL), so it exerts a greater buoyant force per volume."},
-  {s:"9.1",q:"What is average density?",a:"The total mass of all substances making up an object divided by the total volume."},
-  {s:"9.1",q:"How does a steel ship float?",a:"The ship is hollow, so its average density (hull + air) is less than the density of water."},
-  {s:"9.1",q:"Give 3 technologies that use density and buoyancy.",a:"Personal flotation devices, submarines, and hot air balloons."},
-  {s:"9.1",q:"How does a submarine control its depth?",a:"By pumping water in or out of ballast tanks — more water = sinks, less water = rises."},
-  {s:"9.1",q:"What is a hydrometer?",a:"An instrument that measures liquid density using Archimedes' principle — sinks lower in less dense liquids."},
-  {s:"9.1",q:"Give examples of objects that float or sink depending on application.",a:"Metal boat (floats) vs. metal block (sinks); sealed empty bottle (floats) vs. full bottle (sinks)."},
-  {s:"9.2",q:"What is pressure?",a:"The force acting on a certain area of a surface. P = F / A"},
-  {s:"9.2",q:"What is the formula for pressure?",a:"P = F / A (Pressure = Force ÷ Area)"},
-  {s:"9.2",q:"What is the formula for force using pressure?",a:"F = P × A (Force = Pressure × Area)"},
-  {s:"9.2",q:"What is the formula for area using pressure?",a:"A = F / P (Area = Force ÷ Pressure)"},
-  {s:"9.2",q:"What unit is pressure measured in?",a:"Pascals (Pa). 1 Pa = 1 N/m². Named after Blaise Pascal."},
-  {s:"9.2",q:"What is atmospheric pressure?",a:"The pressure exerted by layers of air surrounding Earth held by gravity. Decreases as altitude increases."},
-  {s:"9.2",q:"Why does water pressure increase with depth?",a:"More water above you means more weight pressing down, increasing pressure."},
-  {s:"9.2",q:"What is compressibility?",a:"The ability of a substance to be squeezed into a smaller volume."},
-  {s:"9.2",q:"Are gases compressible or incompressible? Why?",a:"Compressible — gas particles are far apart and can be squeezed closer together."},
-  {s:"9.2",q:"Are liquids and solids compressible or incompressible? Why?",a:"Incompressible — their particles are already very close with little space to compress."},
-  {s:"9.2",q:"What is Pascal's Law?",a:"Pressure applied to an enclosed fluid is transmitted equally in all directions throughout the entire container."},
-  {s:"9.2",q:"Give a common example of Pascal's Law.",a:"Squeezing toothpaste — pressure at the bottom transmits through and forces paste out the top."},
-  {s:"9.2",q:"What is a hydraulic system?",a:"A system using pressure through an enclosed liquid (oil or water) to create force and movement."},
-  {s:"9.2",q:"What is hydraulic multiplication?",a:"Using Pascal's Law to apply a small force on a small area to produce a much larger force on a larger area."},
-  {s:"9.2",q:"Give 3 examples of hydraulic systems.",a:"Car lift/hoist, hydraulic jack, and automobile braking system."},
-  {s:"9.2",q:"What is a pneumatic system?",a:"A system that uses an enclosed compressed gas (like air) to transmit force and cause motion."},
-  {s:"9.2",q:"How is a pneumatic system different from a hydraulic system?",a:"Pneumatic uses compressible gases; hydraulic uses incompressible liquids."},
-  {s:"9.2",q:"Give 2 examples of pneumatic systems.",a:"Jackhammer and dentist's drill (also: air brakes on trucks/buses)."},
-  {s:"9.2",q:"What is static pressure?",a:"Pressure in an enclosed, non-flowing fluid — still capable of transmitting force even when not moving."},
-  {s:"9.2",q:"Why do your ears pop as altitude increases?",a:"Outside air pressure drops while inside-ear pressure stays the same; the eardrum pops as it equalizes."},
-  {s:"9.3",q:"What is a controlled variable?",a:"The variable held constant during an experiment so only one variable is tested at a time."},
-  {s:"9.3",q:"What three factors influence one another in gases?",a:"Temperature, pressure, and volume."},
-  {s:"9.3",q:"What is Boyle's Law?",a:"When temperature is constant, increasing the pressure on a gas decreases its volume (and vice versa)."},
-  {s:"9.3",q:"Give an example of Boyle's Law.",a:"Doubling the pressure cuts the volume in half. Ten times the pressure = one-tenth the volume."},
-  {s:"9.3",q:"What must be controlled when testing pressure vs. volume of a gas?",a:"Temperature must be held constant."},
-  {s:"9.3",q:"What is Charles' Law?",a:"When pressure is constant, increasing the temperature of a gas increases its volume proportionally."},
-  {s:"9.3",q:"What happens to gas volume when heated (pressure constant)?",a:"Volume increases — particles gain energy, move faster, and push farther apart."},
-  {s:"9.3",q:"What happens to gas volume when cooled (pressure constant)?",a:"Volume decreases — particles lose energy and move closer together."},
-  {s:"9.3",q:"What must be controlled when testing temperature vs. volume of a gas?",a:"Pressure must be held constant."},
-  {s:"9.3",q:"What is the relationship between temperature and pressure (volume constant)?",a:"Increasing temperature increases pressure — particles hit the container walls harder and more often."},
-  {s:"9.3",q:"What must be controlled when testing temperature vs. pressure of a gas?",a:"Volume must be held constant."},
-  {s:"9.3",q:"Why should you never incinerate an aerosol can?",a:"Heating gas in a sealed can (constant volume) raises pressure until it could explode."},
-  {s:"9.3",q:"What is absolute zero?",a:"-273.15°C — the lowest possible temperature where gas particles have zero kinetic energy."},
-  {s:"9.3",q:"How does a pressure cooker work?",a:"Steam is trapped (constant volume), so rising temperature also raises pressure — cooking food faster."},
-  {s:"9.3",q:"Give a practical use of the pressure-volume relationship.",a:"Designing portable oxygen tanks — compressing gas allows more to fit in a small tank."},
-  {s:"9.3",q:"If pressure on a gas decreases (temperature constant), what happens to volume?",a:"Volume increases — less pressure allows particles to spread farther apart (Boyle's Law)."},
-  {s:"9.3",q:"Why do helium balloons burst as they rise in the atmosphere?",a:"Atmospheric pressure decreases with altitude, so the gas inside expands until the balloon bursts."}
+  // 5.1 Ray Model & Laws of Reflection
+  {s:"5.1", q:"What is the Ray Model of Light?", a:"A model used to study the behaviour of light when it meets a surface. Light is represented by a straight line (ray) showing the direction light is travelling."},
+  {s:"5.1", q:"What is a transparent material?", a:"A material that allows light to pass through freely — only a small amount is absorbed or reflected. Example: glass, clear water."},
+  {s:"5.1", q:"What is an opaque material?", a:"A material that prevents any light from passing through — it only absorbs or reflects light. Example: wood, metal."},
+  {s:"5.1", q:"What is a translucent material?", a:"A material that allows most light rays to pass through, but scatters them in all directions. Example: frosted glass, wax paper."},
+  {s:"5.1", q:"What is an incident light ray?", a:"A ray that strikes a reflecting or refracting surface."},
+  {s:"5.1", q:"What is a reflected light ray?", a:"The ray leaving a reflecting surface after an incoming ray has struck it."},
+  {s:"5.1", q:"What is the normal?", a:"An imaginary line perpendicular (at 90°) to a surface such as a mirror or lens."},
+  {s:"5.1", q:"What is the angle of incidence?", a:"The angle between the incident ray and the normal (labelled i)."},
+  {s:"5.1", q:"What is the angle of reflection?", a:"The angle between the reflected ray and the normal (labelled r)."},
+  {s:"5.1", q:"State the Law of Reflection.", a:"The angle of incidence equals the angle of reflection. (i = r)"},
+  {s:"5.1", q:"What is specular reflection?", a:"Reflection from a smooth, flat surface that produces a clear image of the surroundings. Example: bathroom mirror, mountain reflected in calm water."},
+  {s:"5.1", q:"What is diffuse reflection?", a:"Reflection from a rough surface that scatters light in all directions — does not produce an image but allows you to see the surface. Example: light reflecting off a page of paper."},
+  {s:"5.1", q:"How does diffuse reflection allow you to read a page?", a:"The black ink absorbs all light (no reflection). The white paper creates diffuse reflection, scattering light to your eyes so you can see the surface."},
+  {s:"5.1", q:"What is a ray diagram?", a:"A useful way to represent the behaviour of light — uses lines with arrows to show the direction of light rays."},
+
+  // 5.2 Plane Mirrors
+  {s:"5.2", q:"What is a plane mirror?", a:"A flat, smooth mirror or reflective surface."},
+  {s:"5.2", q:"What are the SPOT characteristics of a plane mirror image?", a:"Size: same as object. Position: same distance behind mirror as object is in front. Orientation: upright (but left-right flipped). Type: virtual."},
+  {s:"5.2", q:"What does 'virtual image' mean for a plane mirror?", a:"The image appears to be behind the mirror, but no light rays actually come from that location. A screen placed there would show nothing."},
+  {s:"5.2", q:"In a plane mirror, how does image distance compare to object distance?", a:"They are equal — the image is as far behind the mirror as the object is in front."},
+  {s:"5.2", q:"In a plane mirror, how does image size compare to object size?", a:"The image is the same size as the object."},
+  {s:"5.2", q:"Is the image in a plane mirror upright or inverted?", a:"Upright (right-side up), but left-right reversed."},
+  {s:"5.2", q:"Give 4 examples of plane mirrors.", a:"Bathroom mirrors, rear-view mirrors, dentist's mirror for teeth, periscopes."},
+  {s:"5.2", q:"How do you draw a ray diagram for a plane mirror?", a:"Draw 2 rays from the top of the object to the mirror (at equal angles to the normal). Trace them back behind the mirror to find the image. Check SPOT characteristics."},
+  {s:"5.2", q:"What are the two rules that always hold for plane mirror images?", a:"1) Angle of incidence = angle of reflection. 2) Image and object are always the same size."},
+
+  // 5.3 Concave & Convex Mirrors
+  {s:"5.3", q:"What is a concave mirror?", a:"A curved mirror where the centre is behind the outer edges — the reflecting surface curves inward like the inside of a bowl."},
+  {s:"5.3", q:"What is a convex mirror?", a:"A curved mirror where the centre protrudes out beyond the outer edges — the reflecting surface curves outward."},
+  {s:"5.3", q:"What is the focal point of a mirror?", a:"The point at which converging light rays meet (concave) or from which light rays appear to diverge (convex)."},
+  {s:"5.3", q:"What is focal length?", a:"The distance from the centre of the mirror to its focal point."},
+  {s:"5.3", q:"What is the principal axis?", a:"A line that is perpendicular (normal) to the centre of a mirror or lens."},
+  {s:"5.3", q:"What are the SPOT characteristics of a convex mirror image?", a:"Size: smaller than object. Position: behind the mirror. Orientation: upright. Type: virtual."},
+  {s:"5.3", q:"What are the SPOT characteristics of a concave mirror image (object beyond 2F)?", a:"Size: smaller. Position: between F and 2F in front of mirror. Orientation: inverted. Type: real."},
+  {s:"5.3", q:"What are the SPOT characteristics of a concave mirror image (object between F and 2F)?", a:"Size: larger. Position: beyond 2F in front of mirror. Orientation: inverted. Type: real."},
+  {s:"5.3", q:"What are the SPOT characteristics of a concave mirror image (object between F and mirror)?", a:"Size: larger. Position: behind the mirror. Orientation: upright. Type: virtual."},
+  {s:"5.3", q:"What is a real image?", a:"An image formed when reflected or refracted rays actually meet. If a screen is placed at the image position, the image can be seen on it."},
+  {s:"5.3", q:"What is a virtual image?", a:"An image that appears to be the source of light rays, but no rays actually come from it. A screen at that position would show nothing."},
+  {s:"5.3", q:"How does Ray 1 behave in a concave mirror ray diagram?", a:"The ray travels from the top of the object parallel to the principal axis, then reflects through the focal point."},
+  {s:"5.3", q:"How does Ray 2 behave in a concave mirror ray diagram?", a:"The ray travels from the top of the object through the focal point, then reflects parallel to the principal axis."},
+  {s:"5.3", q:"Give 4 examples of concave mirrors.", a:"Inside a metal spoon, spotlights, car headlights, flashlights, lighthouses, overhead projectors, satellite dishes."},
+  {s:"5.3", q:"Give 2 examples of convex mirrors.", a:"Safety mirror on the front of a school bus, security mirrors in stores, side-view mirrors on cars (passenger side)."},
+  {s:"5.3", q:"What are the steps for drawing a ray diagram?", a:"1) Draw 2 light rays from the top of the object. 2) Sketch the image at their intersection. 3) Complete SPOT characteristics (Size, Position, Orientation, Type)."},
+  {s:"5.3", q:"Why are convex mirrors used as safety/security mirrors?", a:"They produce a wide field of view — the image is smaller but covers a much wider area than a plane mirror."},
+
+  // 5.4 Refraction
+  {s:"5.4", q:"What is refraction?", a:"The bending of light as it passes from one medium (material) into another of different density."},
+  {s:"5.4", q:"What causes light to refract?", a:"When light moves into a medium of different density, its speed changes — this change in speed causes the direction to bend."},
+  {s:"5.4", q:"What is the angle of refraction?", a:"The angle between the refracted ray and the normal in the second medium."},
+  {s:"5.4", q:"What is a refracted ray?", a:"The ray that has passed into a new medium and changed direction due to refraction."},
+  {s:"5.4", q:"When light moves from a less dense to a more dense medium, which way does it bend?", a:"It bends toward the normal — the angle of refraction is less than the angle of incidence."},
+  {s:"5.4", q:"When light moves from a more dense to a less dense medium, which way does it bend?", a:"It bends away from the normal — the angle of refraction is greater than the angle of incidence."},
+  {s:"5.4", q:"What happens to the speed of light as it enters a more dense medium?", a:"The speed decreases (slows down)."},
+  {s:"5.4", q:"What happens to the speed of light as it enters a less dense medium?", a:"The speed increases (speeds up)."},
+  {s:"5.4", q:"What is the 'bent stick' effect?", a:"A stick partly in water appears bent at the surface. The stick is not actually bent — the light rays from the submerged part are refracted at the water's surface."},
+  {s:"5.4", q:"What is the apparent position of a fish underwater?", a:"A fish underwater appears to be above its actual position — refraction bends the light rays upward as they leave the water, making the fish appear shallower."},
+  {s:"5.4", q:"Rank these media from most to least bending of light: vegetable oil, water, rubbing alcohol.", a:"Most bending: vegetable oil. Middle: water. Least bending: rubbing alcohol / hydrogen peroxide."},
+  {s:"5.4", q:"Which is more optically dense — vegetable oil or water?", a:"Vegetable oil — it slows light more and causes a bigger bend (greater refraction)."},
+  {s:"5.4", q:"What does the normal represent in refraction?", a:"An imaginary line perpendicular to the surface between two media — it extends through both media and is used to measure angles."},
 ];
 
 let cards = [...allCards];
@@ -580,12 +372,10 @@ function updateMainCard() {
   $('mainPinBtn').classList.toggle('pinned', isPinned);
   $('pinBtnLabel').textContent = isPinned ? 'Pinned' : 'Pin';
 }
-
 function updateTotals() {
   $('totalCards').textContent = cards.length;
   $('totalCardsBottom').textContent = cards.length;
 }
-
 function updatePinnedDeck() {
   pinnedCards = allCards.filter(c => pinnedIds.has(c.q));
   $('pinnedCount').textContent = pinnedCards.length;
@@ -599,7 +389,6 @@ function updatePinnedDeck() {
     updatePinnedCard();
   }
 }
-
 function updatePinnedCard() {
   if (!pinnedCards.length) return;
   const c = pinnedCards[pinnedIndex];
@@ -611,7 +400,6 @@ function updatePinnedCard() {
   $('pinnedTotal').textContent = pinnedCards.length;
   $('pinnedProgressBar').style.width = ((pinnedIndex + 1) / pinnedCards.length * 100) + '%';
 }
-
 function filterSection(s, btn) {
   activeFilter = s;
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -621,77 +409,18 @@ function filterSection(s, btn) {
   $('cardInner').classList.remove('flipped');
   updateTotals(); updateMainCard();
 }
-
-function flipCard() {
-  isFlipped = !isFlipped;
-  $('cardInner').classList.toggle('flipped', isFlipped);
-}
-function nextCard() {
-  isFlipped = false; $('cardInner').classList.remove('flipped');
-  currentIndex = (currentIndex + 1) % cards.length;
-  updateMainCard();
-}
-function prevCard() {
-  isFlipped = false; $('cardInner').classList.remove('flipped');
-  currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-  updateMainCard();
-}
-function shuffleCards() {
-  cards = [...cards].sort(() => Math.random() - 0.5);
-  currentIndex = 0; isFlipped = false;
-  $('cardInner').classList.remove('flipped');
-  updateMainCard();
-}
-function resetCards() {
-  cards = activeFilter === 'all' ? [...allCards] : allCards.filter(c => c.s === activeFilter);
-  currentIndex = 0; isFlipped = false;
-  $('cardInner').classList.remove('flipped');
-  updateTotals(); updateMainCard();
-}
-
-function togglePin() {
-  const q = cards[currentIndex].q;
-  if (pinnedIds.has(q)) pinnedIds.delete(q);
-  else pinnedIds.add(q);
-  updateMainCard();
-  updatePinnedDeck();
-}
-function unpinCurrent() {
-  if (!pinnedCards.length) return;
-  pinnedIds.delete(pinnedCards[pinnedIndex].q);
-  pinnedFlipped = false;
-  $('pinnedCardInner').classList.remove('flipped');
-  updateMainCard();
-  updatePinnedDeck();
-}
-function clearAllPins() {
-  pinnedIds.clear();
-  pinnedIndex = 0; pinnedFlipped = false;
-  $('pinnedCardInner').classList.remove('flipped');
-  updateMainCard();
-  updatePinnedDeck();
-}
-
-function flipPinned() {
-  pinnedFlipped = !pinnedFlipped;
-  $('pinnedCardInner').classList.toggle('flipped', pinnedFlipped);
-}
-function nextPinned() {
-  pinnedFlipped = false; $('pinnedCardInner').classList.remove('flipped');
-  pinnedIndex = (pinnedIndex + 1) % pinnedCards.length;
-  updatePinnedCard();
-}
-function prevPinned() {
-  pinnedFlipped = false; $('pinnedCardInner').classList.remove('flipped');
-  pinnedIndex = (pinnedIndex - 1 + pinnedCards.length) % pinnedCards.length;
-  updatePinnedCard();
-}
-function shufflePinned() {
-  pinnedCards = [...pinnedCards].sort(() => Math.random() - 0.5);
-  pinnedIndex = 0; pinnedFlipped = false;
-  $('pinnedCardInner').classList.remove('flipped');
-  updatePinnedCard();
-}
+function flipCard() { isFlipped = !isFlipped; $('cardInner').classList.toggle('flipped', isFlipped); }
+function nextCard() { isFlipped = false; $('cardInner').classList.remove('flipped'); currentIndex = (currentIndex + 1) % cards.length; updateMainCard(); }
+function prevCard() { isFlipped = false; $('cardInner').classList.remove('flipped'); currentIndex = (currentIndex - 1 + cards.length) % cards.length; updateMainCard(); }
+function shuffleCards() { cards = [...cards].sort(() => Math.random() - 0.5); currentIndex = 0; isFlipped = false; $('cardInner').classList.remove('flipped'); updateMainCard(); }
+function resetCards() { cards = activeFilter === 'all' ? [...allCards] : allCards.filter(c => c.s === activeFilter); currentIndex = 0; isFlipped = false; $('cardInner').classList.remove('flipped'); updateTotals(); updateMainCard(); }
+function togglePin() { const q = cards[currentIndex].q; if (pinnedIds.has(q)) pinnedIds.delete(q); else pinnedIds.add(q); updateMainCard(); updatePinnedDeck(); }
+function unpinCurrent() { if (!pinnedCards.length) return; pinnedIds.delete(pinnedCards[pinnedIndex].q); pinnedFlipped = false; $('pinnedCardInner').classList.remove('flipped'); updateMainCard(); updatePinnedDeck(); }
+function clearAllPins() { pinnedIds.clear(); pinnedIndex = 0; pinnedFlipped = false; $('pinnedCardInner').classList.remove('flipped'); updateMainCard(); updatePinnedDeck(); }
+function flipPinned() { pinnedFlipped = !pinnedFlipped; $('pinnedCardInner').classList.toggle('flipped', pinnedFlipped); }
+function nextPinned() { pinnedFlipped = false; $('pinnedCardInner').classList.remove('flipped'); pinnedIndex = (pinnedIndex + 1) % pinnedCards.length; updatePinnedCard(); }
+function prevPinned() { pinnedFlipped = false; $('pinnedCardInner').classList.remove('flipped'); pinnedIndex = (pinnedIndex - 1 + pinnedCards.length) % pinnedCards.length; updatePinnedCard(); }
+function shufflePinned() { pinnedCards = [...pinnedCards].sort(() => Math.random() - 0.5); pinnedIndex = 0; pinnedFlipped = false; $('pinnedCardInner').classList.remove('flipped'); updatePinnedCard(); }
 
 $('cardContainer').addEventListener('click', flipCard);
 $('pinnedCardContainer').addEventListener('click', flipPinned);
@@ -714,4 +443,4 @@ updateMainCard();
 updatePinnedDeck();
 </script>
 </body>
-</html>                     
+</html>
