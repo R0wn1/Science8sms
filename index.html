@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Science 8 Final Exam Master Flashcards</title>
+<title>Science 8 Ultimate Exam Prep Dashboard</title>
 <style>
   :root {
     --bg:        #070d1a;
@@ -43,7 +43,7 @@
   .container { max-width: 54rem; margin: 0 auto; }
   .header { text-align:center; margin-bottom:2rem; }
   .title {
-    font-size:2.1rem; font-weight:800; letter-spacing:-0.03em;
+    font-size:2.2rem; font-weight:800; letter-spacing:-0.03em;
     color: var(--blue6);
     text-shadow: 0 0 40px rgba(96,165,250,0.3);
     margin-bottom:.35rem;
@@ -79,7 +79,7 @@
   .pin-btn:hover { border-color:var(--pin); color:var(--pin); background:var(--pin-bg); }
   .pin-btn.pinned { border-color:var(--pin); color:var(--pin); background:var(--pin-bg); box-shadow: 0 0 12px var(--pin-glow); }
   
-  .card-container { width:100%; height:23rem; cursor:pointer; perspective:1100px; }
+  .card-container { width:100%; height:24rem; cursor:pointer; perspective:1100px; }
   .card-inner { position:relative; width:100%; height:100%; transition:transform .52s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d; }
   .card-inner.flipped { transform:rotateY(180deg); }
   .card-face { position:absolute; width:100%; height:100%; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:1.1rem; padding:2rem; display:flex; flex-direction:column; align-items:center; justify-content:center; }
@@ -98,7 +98,7 @@
   .card-front .card-section-tag { background:var(--surface); border:1px solid var(--border2); color:var(--blue4); }
   .card-back .card-section-tag { background:rgba(255,255,255,.1); color:var(--blue6); border:1px solid rgba(255,255,255,.1); }
   
-  .card-text { font-size:1.15rem; font-weight:500; text-align:center; line-height:1.6; max-width:42rem; white-space: pre-line; }
+  .card-text { font-size:1.1rem; font-weight:500; text-align:center; line-height:1.6; max-width:44rem; white-space: pre-line; }
   .card-front .card-text { color:var(--text); }
   .card-back .card-text { color:#fff; font-weight: 400; }
   
@@ -115,7 +115,6 @@
   .btn-ghost:hover { border-color:var(--blue3); color:var(--blue6); background:var(--surface2); }
   .btn-sm { padding:.4rem .95rem; font-size:.8rem; }
   
-  /* Pinned Panel Deck View spacing styles */
   .pinned-section { margin-top:.5rem; }
   .pinned-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem; }
   .pinned-title-row { display:flex; align-items:center; gap:.6rem; }
@@ -135,7 +134,7 @@
   .unpin-btn svg { width:11px; height:11px; }
   .unpin-btn:hover { border-color:var(--red); color:var(--red); }
   
-  .pinned-card-container { width:100%; height:20rem; cursor:pointer; perspective:1100px; }
+  .pinned-card-container { width:100%; height:22rem; cursor:pointer; perspective:1100px; }
   .pinned-card-inner { position:relative; width:100%; height:100%; transition:transform .52s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d; }
   .pinned-card-inner.flipped { transform:rotateY(180deg); }
   .pinned-card-face { position:absolute; width:100%; height:100%; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:1.1rem; padding:2rem; display:flex; flex-direction:column; align-items:center; justify-content:center; }
@@ -167,8 +166,8 @@
 <div class="container">
 
   <div class="header">
-    <h1 class="title">Science 8 Final Exam Master Deck</h1>
-    <p class="subtitle">Graded out of 40 (10% of total course mark) &bull; Exam Date: Wednesday, June 17th<br>Space / Click to Flip &nbsp;·&nbsp; B to Pin &nbsp;·&nbsp; Arrow Keys Navigate</p>
+    <h1 class="title">Science 8 Master Prep Deck</h1>
+    <p class="subtitle">Complete Study Course Asset &bull; Graded out of 40 (10% of total mark)<br>Space / Click to Flip &nbsp;·&nbsp; B to Pin &nbsp;·&nbsp; Arrow Keys Navigate</p>
   </div>
 
   <div class="section-filter">
@@ -307,6 +306,9 @@
 <script>
 const allCards = [
   // ==================== UNIT 2: FLUIDS ====================
+  {s:"U2-Fluids", q:"Definition Match:\nWhat is the definition of 'Compressibility'?", a:"Compressibility:\nThe ability of a substance to be forced or squeezed into a significantly smaller volume capacity when subjected to external pressure force loads."},
+  {s:"U2-Fluids", q:"Definition Match:\nWhat is a 'Hydraulic System'?", a:"Hydraulic System:\nA confined mechanical configuration that transmits and amplifies force through an enclosed, pressurized liquid channel."},
+  {s:"U2-Fluids", q:"Definition Match:\nWhat is a 'Pneumatic System'?", a:"Pneumatic System:\nA confined physical mechanism that transmits active mechanical forces utilizing highly compressed structural gases."},
   {s:"U2-Fluids", q:"Which statement regarding the Particle Theory of Matter is FALSE?", a:"False statement: 'All particles are attracted to one another with equal strength.'\n\nIn reality, attraction strengths vary significantly across solid, liquid, and gas phases."},
   {s:"U2-Fluids", q:"What are you calculating if you divide the mass of a substance by its volume?", a:"Density.\n\nFormula: Density = Mass ÷ Volume"},
   {s:"U2-Fluids", q:"State Archimedes' Principle regarding buoyant forces.", a:"The buoyant force acting on an object equals the weight of the fluid that the object displaces."},
@@ -316,25 +318,54 @@ const allCards = [
   {s:"U2-Fluids", q:"When does a submarine sink down into the water column?", a:"When its total weight becomes greater than the upward buoyant force (achieved by taking water into its ballast tanks)."},
   {s:"U2-Fluids", q:"What physical mechanism causes your ears to pop during quick altitude shifts?", a:"A net difference in air pressure between the environment and your middle ear cavity."},
   {s:"U2-Fluids", q:"When designing pipe networks, what variable is NOT a major internal fluid dynamics concern?", a:"The external atmospheric air pressure surrounding the outside of the infrastructure."},
-  {s:"U2-Fluids", q:"Define Compressibility, Hydraulic systems, and Pneumatic systems.", a:"• Compressibility: The ability of a substance to be squeezed into a smaller volume.\n• Hydraulic: Systems that transmit force through a confined liquid.\n• Pneumatic: Systems that transmit force using a compressed gas."},
   {s:"U2-Fluids", q:"Explain the differences between Solids, Liquids, and Gases regarding shape and volume.", a:"• Solid: Definite shape and definite volume.\n• Liquid: Definite volume, but takes the shape of its container.\n• Gas: Indefinite shape and volume (expands or compresses to fit the container)."},
   {s:"U2-Fluids", q:"What is the mathematical formula for Pressure, and what are its standard metric units?", a:"Pressure = Force ÷ Area\n\nUnits: Pressure is in Pascals (Pa), Force is in Newtons (N), and Area is in square meters (m²). Note: 1 Pa = 1 N/m²."},
 
   // ==================== UNIT 3: OPTICS ====================
+  {s:"U3-Optics", q:"Definition Match:\nWhat is the definition of an 'Incident light ray'?", a:"Incident Light Ray:\nAn incoming ray of light that directly strikes a reflecting or refracting physical boundary interface surface."},
+  {s:"U3-Optics", q:"Definition Match:\nWhat is a 'Reflected light ray'?", a:"Reflected Light Ray:\nThe specific ray of light that actively leaves a reflective boundary plane after an incoming incident ray impacts it."},
+  {s:"U3-Optics", q:"Definition Match:\nWhat is 'The Normal' in geometric optics diagrams?", a:"The Normal:\nAn imaginary construction line drawn perfectly perpendicular (at a strict 90-degree angle) to a mirror, lens, or interface surface at the point where a light ray strikes."},
+  {s:"U3-Optics", q:"Definition Match:\nWhat are the 'Angle of incidence (i)' and 'Angle of reflection (r)'?", a:"• Angle of Incidence (i): The gap angle measured between the incoming incident ray and the normal line.\n• Angle of Reflection (r): The gap angle measured between the exiting reflected ray and the normal line."},
+  {s:"U3-Optics", q:"Definition Match:\nWhat is the operational definition of 'Light Reflection'?", a:"Reflection:\nThe physical process in which light or another type of wave interacts with a boundary surface and is sent back from that surface into the original medium."},
+  {s:"U3-Optics", q:"Definition Match:\nWhat is the operational definition of 'Light Refraction'?", a:"Refraction:\nThe changing of direction or bending of light (or other wave types) when traveling from one medium into a completely different medium that possesses a different optical density index."},
+  {s:"U3-Optics", q:"Definition Match:\nWhat is the operational definition of 'Wavelength'?", a:"Wavelength:\nThe direct linear distance measured from one specific wave peak crest (or trough) straight to the next consecutive identical wave peak crest or trough asset."},
+  {s:"U3-Optics", q:"Definition Match:\nWhat is the operational definition of 'Frequency'?", a:"Frequency:\nThe net number of complete, repetitive wave cycles, motions, or vibrations that successfully pass by a fixed reference spot within a given timeframe (typically 1 second). Measured in Hertz (Hz)."},
+  {s:"U3-Optics", q:"What historical concept of light was proposed by Pythagoras?", a:"Pythagoras believed that light consisted of physical beams of particles that were ejected directly out from our eyes to sense our surroundings."},
+  {s:"U3-Optics", q:"What core parameter did scientists Galileo Galilei and Albert Michelson run historical experiments to calculate?", a:"The Speed of Light.\n\nMichelson precisely calculated this velocity using an advanced rotating octagonal mirror apparatus system."},
+  {s:"U3-Optics", q:"What is the precise value of the speed of light in a vacuum?", a:"3.00 × 10⁸ meters per second (300,000 km/s)."},
+  {s:"U3-Optics", q:"Explain why you observe a lightning bolt before hearing its thunder, despite both happening at the exact same moment.", a:"Light travels at an immense velocity (3 × 10⁸ m/s) through space, whereas sound travels at a much slower speed through air (~343 m/s). Light reaches your eyes almost instantly."},
+  {s:"U3-Optics", q:"Give examples of early optical technologies that were built as our scientific understanding of light evolved.", a:"• Microscopes: Built using an aligned combination of specialized magnification lenses.\n• Telescopes: Constructed using mirrors and focal lenses to view objects across extreme planetary distances."},
+  {s:"U3-Optics", q:"Define Light from a sensory and physical standpoint.", a:"Light is a fundamental form of electromagnetic radiation energy that can be actively detected by the human eye system."},
+  {s:"U3-Optics", q:"What is Rectilinear Propagation, and what classic optical phenomenon does it create?", a:"The property stating that light travels in straight lines. This straight-line movement is directly responsible for the formation of distinct shadows when blocked."},
   {s:"U3-Optics", q:"What is the Ray Model of Light?", a:"A model used to study the behavior of light when it meets a surface, where light is represented by a straight line (ray) showing its direction of travel."},
   {s:"U3-Optics", q:"Differentiate between Transparent, Translucent, and Opaque materials.", a:"• Transparent: Allows light to pass through freely; only a small amount is absorbed/reflected (e.g., clean glass).\n• Translucent: Allows most light rays to pass but scatters them in all directions (e.g., frosted glass).\n• Opaque: Prevents any light from passing through; it only absorbs or reflects light (e.g., wood)."},
-  {s:"U3-Optics", q:"Define the terms: Incident Ray, Reflected Ray, and the Normal.", a:"• Incident Ray: The incoming ray that strikes a surface.\n• Reflected Ray: The ray leaving a reflective surface after bouncing.\n• Normal: An imaginary line perpendicular (at 90°) to the reflective surface at the point of impact."},
   {s:"U3-Optics", q:"State the Law of Reflection.", a:"The angle of incidence is exactly equal to the angle of reflection (i = r) when measured from the normal line."},
   {s:"U3-Optics", q:"Differentiate between Specular reflection and Diffuse reflection.", a:"• Specular: Light reflects off a perfectly smooth surface, producing a clear image.\n• Diffuse: Light hits a rough surface and scatters in all directions, showing the surface but producing no image."},
+  {s:"U3-Optics", q:"Give real-world baseline examples of both Specular and Diffuse reflections.", a:"• Specular: A clean bathroom mirror or a completely still mountain lake surface.\n• Diffuse: Text printed on paper. Black ink absorbs light while the surrounding raw paper fibers scatter incoming light rays in all directions."},
   {s:"U3-Optics", q:"What are the 'SPOT' characteristics of an image formed by a Plane Mirror?", a:"• Size: Same size as the object.\n• Position: Same distance behind the mirror as the object is in front.\n• Orientation: Upright (but horizontally left-right reversed).\n• Type: Virtual image."},
   {s:"U3-Optics", q:"What does a 'Virtual Image' mean for flat plane mirrors?", a:"The image appears to be located behind the mirror surface, but light rays do not actually cross or emanate from there. A screen placed behind the mirror would display nothing."},
-  {s:"U3-Optics", q:"What is a Concave Mirror and how does it affect parallel light rays?", a:"A mirror whose reflective surface curves inward like the inside of a bowl. It causes parallel light rays to converge to a single focal point (F)."},
+  {s:"U3-Optics", q:"Define Plane, Concave, and Convex mirrors based on their structural shape.", a:"• Plane Mirror: A completely flat and smooth reflective surface.\n• Concave Mirror: Curved inward like the inside of a bowl (center is behind the outer edges).\n• Convex Mirror: Curved outward like the back of a spoon (center protrudes toward the viewer)."},
+  {s:"U3-Optics", q:"Provide high-utility practical examples for Plane, Concave, and Convex mirrors.", a:"• Plane: Standard domestic bathroom mirrors.\n• Concave: Shaving/makeup magnification mirrors, or the inside bowl of a polished metal spoon.\n• Convex: Passenger side-view mirrors, anti-theft corner safety mirrors, or front bus safety convex bubbles."},
+  {s:"U3-Optics", q:"Define Focal Point, Focal Length, and Principal Axis.", a:"• Focal Point (F): The point where converging light rays meet, or from which light rays appear to diverge.\n• Focal Length: The linear distance measured from the optical center of a mirror/lens to its focal point.\n• Principal Axis: An imaginary line normal (perpendicular) to the exact physical center of a mirror or lens surface."},
+  {s:"U3-Optics", q:"How do parallel incident rays interact with a Concave mirror versus a Convex mirror?", a:"• Concave: Parallel incident rays reflect inward and converge through the physical focal point.\n• Convex: Parallel incident rays scatter outward, diverging as if they originated from a focal point behind the mirror surface."},
   {s:"U3-Optics", q:"Explain what a 'Real Image' is in optics.", a:"An image formed where light rays physically intersect. If a physical screen is placed at that position, the image will appear sharply projected upon it."},
-  {s:"U3-Optics", q:"What is Refraction and what is its underlying cause?", a:"The bending of light as it passes from one medium into another. It is caused by a change in the speed of light when it enters a medium of a different optical density."},
   {s:"U3-Optics", q:"Describe the direction of bending when light enters a more dense versus a less dense medium.", a:"• Less dense to More dense: Light slows down and bends TOWARD the normal.\n• More dense to Less dense: Light speeds up and bends AWAY from the normal."},
   {s:"U3-Optics", q:"Explain the optical phenomena of the 'bent stick' effect and fish position distortion.", a:"• Bent Stick: Refraction at the boundary makes an object partially submerged look bent.\n• Fish Apparent Position: Refraction bends light rays upward as they leave water, making fish appear closer to the surface than they actually are."},
+  {s:"U3-Optics", q:"Rank the comparative bending strength of Vegetable Oil, Water, and Rubbing Alcohol/Peroxide on light.", a:"• Vegetable Oil: High optical density, causing a significant, large bend toward the normal.\n• Water: Moderate density, causing a standard intermediate bend.\n• Rubbing Alcohol / Hydrogen Peroxide: Lower optical index shifts, yielding a slight bend."},
+  {s:"U3-Optics", q:"What physical action occurs when white light travels through an optical glass Prism?", a:"Dispersion occurs. White light separates into its component rainbow spectrum colors because each individual wavelength travels at a different speed inside the glass and refracts at varying degrees."},
+  {s:"U3-Optics", q:"List the component colors of visible light in order from the SMALLEST degree of refraction to the GREATEST.", a:"Red, Orange, Yellow, Green, Blue, Indigo, Violet (ROY G BIV).\n\nRed has the longest wavelength and refracts the least; Violet has the shortest wavelength and refracts the most."},
+  {s:"U3-Optics", q:"Explain the direct mathematical relationship shared between Wavelength and Frequency.", a:"They share an inverse relationship. High-frequency waves have short, compressed wavelengths. Conversely, low-frequency waves have long, stretched-out wavelengths."},
+  {s:"U3-Optics", q:"List the components of the Electromagnetic Spectrum in order of DECREASING wavelength.", a:"Radio waves → Microwaves → Infrared radiation → Visible light → Ultraviolet rays → X-rays → Gamma rays.\n\nNote: Decreasing wavelength corresponds to a steady increase in both frequency and total photon energy."},
+  {s:"U3-Optics", q:"Provide high-utility technological application examples for Infrared, Radio, and Microwaves.", a:"• Infrared: Automatic motion detectors and thermal night vision equipment.\n• Radio Waves: Telecommunications networks and broadcast signals.\n• Microwaves: Industrial radar systems and domestic food cooking appliances."},
+  {s:"U3-Optics", q:"Provide engineering application examples for Ultraviolet, X-rays, and Gamma rays.", a:"• Ultraviolet: Disinfection systems and medical treatment for infant jaundice.\n• X-rays: Non-invasive diagnostic medical imaging.\n• Gamma Rays: Highly focused radiation oncology cancer therapy treatments."},
+  {s:"U3-Optics", q:"What is the core rule regarding electromagnetic radiation safety and human tissue damage?", a:"Generally, higher frequency/higher energy electromagnetic radiation (such as short-wavelength UV, X-rays, and Gamma rays) carries enough energy to cause cell ionization, making them significantly more harmful to humans upon overexposure."},
+  {s:"U3-Optics", q:"Construct a quick pros/cons impact profile for X-rays, Ultraviolet, and Radio Waves.", a:"• X-rays: (+) Detects bone fractures | (-) Carries carcinogen mutation risks over time.\n• Ultraviolet: (+) Synthesizes vitamin D and treats jaundice | (-) Promotes skin cancer/melanomas.\n• Radio Waves: (+) Global telecommunication connectivity | (-) Unconfirmed baseline health questions over continuous long-term exposure close to high-output arrays."},
 
   // ==================== UNIT 4: CELLS & MICROSCOPES ====================
+  {s:"U4-Cells", q:"Definition Match:\nWhat is the absolute biological definition of a 'Cell'?", a:"Cell:\nThe smallest, most basic functional structural system unit of any living organism."},
+  {s:"U4-Cells", q:"Definition Match:\nWhat is 'Modern Cell Theory'?", a:"Modern Cell Theory:\nOne of the core foundation frameworks of biology. It states that all living things are composed of cells, the cell is the core operational unit of life, and all cells arise exclusively from pre-existing living cells."},
+  {s:"U4-Cells", q:"Definition Match:\nWhat is the role of the 'Cell Wall'?", a:"Cell Wall:\nA tough, rigid outer protective structural frame layer surrounding the cell membrane of plant cells, providing physical support and shape maintenance."},
+  {s:"U4-Cells", q:"Definition Match:\nWhat is the function of the 'Chloroplast' organelle?", a:"Chloroplast:\nA plant cell organelle that contains chemical chlorophyll pigments which actively trap radiant energy from the sun to perform photosynthesis."},
   {s:"U4-Cells", q:"Compare early ideas about the composition of life with Modern Cell Theory.", a:"Ancient civilizations believed life arose spontaneously or was composed of fundamental elements like air, fire, and water.\n\nModern Cell Theory states that all living things are made of cells, the cell is the functional unit of life, and all cells come from pre-existing cells."},
   {s:"U4-Cells", q:"List the 4 fundamental characteristics of living things.", a:"1. Growth: An increase in size or structural mass (cells increasing in number).\n2. Movement (Locomotion): A change in physical position, orientation, or shape.\n3. Response to Stimuli: Reacting to external changes in the surrounding environment.\n4. Reproduction: Producing more organisms of the same kind."},
   {s:"U4-Cells", q:"State the function of the Microscope Eyepiece and Objective Lenses.", a:"• Eyepiece (Ocular): The component you look through; contains a lens that magnifies the specimen (often 10x).\n• Objective Lenses: A series of movable lenses that provide low, medium, or high-power magnification."},
@@ -349,9 +380,7 @@ const allCards = [
   {s:"Extensions", q:"Calculate Density:\nA 40 cm³ cube of pure nickel has a mass of 356 g. What is its density?", a:"Formula: Density = Mass ÷ Volume\n\nCalculation:\nDensity = 356 g ÷ 40 cm³ = 8.9 g/cm³"},
   {s:"Extensions", q:"Calculate Density:\nA 200 mL sample of rubbing alcohol has a mass of 158 g. What is its density?", a:"Formula: Density = Mass ÷ Volume\n\nCalculation:\nDensity = 158 g ÷ 200 mL = 0.79 g/mL"},
   {s:"Extensions", q:"Calculate Pressure:\nA 125 kg athlete exerts a downward weight force of 1250 N. If they stand on a platform with an area of 0.25 m², what pressure is exerted?", a:"Formula: Pressure = Force ÷ Area\n\nCalculation:\nPressure = 1250 N ÷ 0.25 m² = 5000 Pa (or 5 kPa)"},
-  {s:"Extensions", q:"What is Viscosity, and how does heating affect liquids versus gases?", a:"Viscosity is a fluid's internal resistance to flow.\n• Liquids: Heating decreases viscosity (particles move faster, reducing friction; flows more easily).\n• Gases: Heating increases viscosity (particles collide more frequently, increasing internal resistance)."},
-  {s:"Extensions", q:"List the components of the Electromagnetic Spectrum in order of INCREASING frequency.", a:"Radio waves → Microwaves → Infrared waves → Visible light → Ultraviolet waves → X-rays → Gamma rays.\n\n(Note: Increasing frequency means shorter wavelengths)."},
-  {s:"Extensions", q:"List the 6 main colors of the visible light spectrum from longest wavelength to shortest wavelength.", a:"Red, Orange, Yellow, Green, Blue, Violet.\n\nMemory Aid: ROY G BV. Red has the longest wavelength (lowest frequency); Violet has the shortest wavelength (highest frequency)."}
+  {s:"Extensions", q:"What is Viscosity, and how does heating affect liquids versus gases?", a:"Viscosity is a fluid's internal resistance to flow.\n• Liquids: Heating decreases viscosity (particles move faster, reducing friction; flows more easily).\n• Gases: Heating increases viscosity (particles collide more frequently, increasing internal resistance)."}
 ];
 
 let cards = [...allCards];
@@ -392,7 +421,6 @@ function updateMainCard() {
 }
 
 function updateTotals() {
-  // Update section pill indicators dynamically
   $('countAll').textContent = allCards.length;
   $('countU2').textContent = allCards.filter(c => c.s === 'U2-Fluids').length;
   $('countU3').textContent = allCards.filter(c => c.s === 'U3-Optics').length;
@@ -549,7 +577,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// Run Initializer
 updateTotals();
 updateMainCard();
 updatePinnedDeck();
