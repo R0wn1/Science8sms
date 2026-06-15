@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Science 8 Final Exam Comprehensive Flashcards</title>
+<title>Science 8 Final Exam Master Flashcards</title>
 <style>
   :root {
     --bg:        #070d1a;
@@ -128,7 +128,7 @@
   .pin-progress-container { margin-bottom:1rem; }
   .pin-progress-labels { display:flex; justify-content:space-between; font-size:.76rem; color:var(--muted); margin-bottom:.3rem; }
   .pin-progress-track { width:100%; background:var(--surface2); border-radius:9999px; height:4px; overflow:hidden; border:1px solid var(--border); }
-  .pin-progress-fill { background: linear-gradient(90deg, var(--pin-dark), var(--pin-amber)); height:100%; border-radius9999px; transition:width .35s ease; box-shadow: 0 0 6px var(--pin-glow); }
+  .pin-progress-fill { background: linear-gradient(90deg, var(--pin-dark), var(--pin-amber)); height:100%; border-radius:9999px; transition:width .35s ease; box-shadow: 0 0 6px var(--pin-glow); }
   
   .pinned-card-wrapper { position:relative; margin-bottom:1rem; }
   .unpin-btn { position:absolute; top:.8rem; right:.8rem; z-index:10; display:flex; align-items:center; gap:.3rem; padding:.3rem .75rem; background:var(--surface); border:1.5px solid rgba(233,162,59,.4); border-radius:9999px; cursor:pointer; color:var(--pin); font-size:.7rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; transition:all .18s; backdrop-filter:blur(6px); }
@@ -199,13 +199,13 @@
         <div class="card-face card-front">
           <div class="card-label">Question</div>
           <div class="card-section-tag" id="sectionFront"></div>
-          <div class="card-text" id="questionText"></div>
+          <div class="card-text" id="questionText">Loading master data assets...</div>
           <div class="card-hint">↻ Click or press Space to reveal answer</div>
         </div>
         <div class="card-face card-back">
           <div class="card-label">Answer</div>
           <div class="card-section-tag" id="sectionBack"></div>
-          <div class="card-text" id="answerText"></div>
+          <div class="card-text" id="answerText">Loading text logs...</div>
           <div class="card-hint">↻ Click to return to question</div>
         </div>
       </div>
@@ -372,6 +372,7 @@ function updateMainCard() {
     $('sectionFront').textContent = "None";
     $('sectionBack').textContent = "None";
     $('currentCard').textContent = 0;
+    $('totalCardsBottom').textContent = 0;
     $('progressBar').style.width = '0%';
     $('mainPinBtn').style.display = 'none';
     return;
@@ -383,6 +384,7 @@ function updateMainCard() {
   $('sectionFront').textContent = c.s.replace('-', ' ');
   $('sectionBack').textContent = c.s.replace('-', ' ');
   $('currentCard').textContent = currentIndex + 1;
+  $('totalCardsBottom').textContent = cards.length;
   $('progressBar').style.width = ((currentIndex + 1) / cards.length * 100) + '%';
   const isPinned = pinnedIds.has(c.q);
   $('mainPinBtn').classList.toggle('pinned', isPinned);
@@ -390,10 +392,7 @@ function updateMainCard() {
 }
 
 function updateTotals() {
-  $('totalCards').textContent = allCards.length;
-  $('totalCardsBottom').textContent = cards.length;
-  
-  // Update section pill indicators
+  // Update section pill indicators dynamically
   $('countAll').textContent = allCards.length;
   $('countU2').textContent = allCards.filter(c => c.s === 'U2-Fluids').length;
   $('countU3').textContent = allCards.filter(c => c.s === 'U3-Optics').length;
@@ -550,6 +549,7 @@ document.addEventListener('keydown', e => {
   }
 });
 
+// Run Initializer
 updateTotals();
 updateMainCard();
 updatePinnedDeck();
